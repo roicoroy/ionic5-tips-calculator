@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Waiters
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Waiters</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid fixed class='ion-text-center'>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="addWaiter()" expand="block" fill="clear" shape="round">
+          Add Waiter
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">Waiters</ion-col>
+      <ion-col size="4">Points</ion-col>
+      <ion-col size="4">Hours</ion-col>
+    </ion-row>
+    <ion-row *ngFor='let waiter of waiters'>
+      <ion-col size="4">
+        <ion-text color="dark">
+          <p>{{waiter.name}}</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-text color="dark">
+          <p>{{waiter.points}}</p>
+        </ion-text>
+      </ion-col>
+      <ion-col size="4">
+        <ion-text color="dark">
+          <p>{{waiter.hours}}</p>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class='calculate-col'>
+      <ion-col size="12">
+        <ion-button (click)="calculateTipsPage()" color='primary' expand="block" fill="solid" shape="round">
+          <ion-text color="dark">
+            <h1>Next Calculate Tips</h1>
+          </ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class='totals-col'>
+      <ion-col size="12">
+        <ion-button (click)="seeWaiters()" color='secondary' expand="block" fill="outline" shape="round">
+          <ion-text color="primary">
+            <h1>See Waiters Summary</h1>
+          </ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
