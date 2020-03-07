@@ -9,28 +9,30 @@ import { AddTipsComponent } from './add-tips/add-tips.component';
 })
 export class WaitersPage implements OnInit {
   waiters = [];
+  data = {
+    name: 'Ricardo',
+    points: 3.0
+  }
   constructor(
     public alertController: AlertController,
     private router: Router,
-    public modalController: ModalController
-  ) {
-    
-  }
+    public modalController: ModalController,
+  ) { }
 
   ngOnInit() {
+
   }
-  // addWaiter() {
-  //   const data = {
-  //     name: 'Jose',
-  //     points: 3.0,
-  //     hours: 30
-  //   };
-  //   this.waiters.push(data);
-  //   console.log('add waiter, open component', this.waiters);
-  // }
+  addMockData() {
+    const data = {
+      name: 'Jose',
+      points: 3.0,
+      hours: 30
+    };
+    this.waiters.push(data);
+    console.log('add waiter, open component', this.waiters);
+  }
   calculateTipsPage() {
     console.log('calculate tips');
-
   }
   async addWaiter() {
     const modal = await this.modalController.create({
@@ -47,4 +49,46 @@ export class WaitersPage implements OnInit {
     });
     await alert.present();
   }
+
+
+  async presentAlertCheckbox() {
+    const alert = await this.alertController.create({
+      header: 'Checkbox',
+      inputs: [
+        {
+          name: 'checkbox1',
+          type: 'checkbox',
+          label: 'Checkbox 1',
+          value: 'value1',
+          checked: true
+        },
+
+        {
+          name: 'checkbox2',
+          type: 'checkbox',
+          label: 'Checkbox 2',
+          value: 'value2'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (inputs) => {
+            console.log('Confirm Ok');
+            console.log(inputs);
+          }
+        }
+      ]
+    });
+    await alert.present();
+    console.log(alert);
+  }
+
 }
