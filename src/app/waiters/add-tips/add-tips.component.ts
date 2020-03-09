@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
+
 @Component({
   selector: 'add-tips',
   templateUrl: './add-tips.component.html',
@@ -11,7 +11,6 @@ export class AddTipsComponent implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private nativeStorage: NativeStorage
   ) {
   }
 
