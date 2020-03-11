@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'waiters',
     loadChildren: () => import('./waiters/waiters.module').then(m => m.WaitersPageModule)
+  },
+  {
+    path: 'form',
+    loadChildren: () => import('./form/form.module').then(m => m.FormPageModule)
   }
 ];
 @NgModule({

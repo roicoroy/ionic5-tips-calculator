@@ -7,15 +7,15 @@ const { Storage } = Plugins;
 })
 export class StorageService {
   constructor() { }
-  async setItem() {
-    await Storage.set({
-      key: 'name',
-      value: 'Max'
+  async setItem(key, value) {
+    // let myvalue = JSON.parse(value);
+    return await Storage.set({
+      key: key,
+      value: value
     });
   }
-  async getItem() {
-    const { value } = await Storage.get({ key: 'name' });
-    console.log('Got item: ', value);
+  async getItem(key: any) {
+    return await Storage.get({ key });
   }
   async removeItem() {
     await Storage.remove({ key: 'name' });
