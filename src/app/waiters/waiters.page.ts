@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlertController, ModalController, ActionSheetController, ToastController } from '@ionic/angular';
+import { AlertController, ModalController, ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AddTipsComponent } from './add-tips/add-tips.component';
 import { StorageService } from '../services/storage.service';
 import { Plugins } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { FormBuilder, FormControl, Validators, FormGroup, FormArray } from '@angular/forms';
+import { Waiter, Points } from '../interfaces/intefaces';
+import { AddPointsComponent } from './add-points/add-points.component';
 const { Storage } = Plugins;
 @Component({
   selector: 'app-waiters',
@@ -15,36 +17,52 @@ const { Storage } = Plugins;
 export class WaitersPage implements OnInit {
   waiters;
   waitersForm: FormGroup;
+
+  customAlertOptions: any = {
+    header: "Choose the waiter's ponits",
+    translucent: true
+  };
+  points: any;
+
   constructor(
     public alertController: AlertController,
     private router: Router,
     public modalController: ModalController,
     public actionSheetController: ActionSheetController,
     private formBuilder: FormBuilder,
-    private toastController: ToastController,
   ) {
     this.waitersForm = formBuilder.group({
       waiterList: this.formBuilder.array([
         this.initWaiters(),
       ]),
     });
+    this.points = [
+      {
+        criteria: 'Speak good English',
+        pontuation: 0.5
+      },
+      {
+        criteria: 'Serve Wine',
+        pontuation: 0.5
+      }
+    ];
   }
   initWaiters(): FormGroup {
     return this.formBuilder.group({
       name: [''],
-      points: [''],
+      // points: [''],
     });
   }
-  addNewInputField(): void {
+  addNewWaiterField(): void {
     const control = this.waitersForm.controls.waiterList as FormArray;
     control.push(this.initWaiters());
   }
-  removeInputField(i: number): void {
+  removeWaiterField(i: number): void {
     const control = this.waitersForm.controls.waiterList as FormArray;
     if (control.length > 1) {
       control.removeAt(i);
     } else {
-      this.minIngrediantError();
+      this.minWaiterError();
     }
   }
   get formData() {
@@ -56,6 +74,12 @@ export class WaitersPage implements OnInit {
     }
   }
   ngOnInit() {
+  }
+  optionsFn(pontuation) {
+    console.log(pontuation);
+  }
+  calculator() {
+    this.router.navigateByUrl('calculator');
   }
   // ionViewWillEnter() {
   //   this.getDataObservable().subscribe(responseWaiters => {
@@ -79,67 +103,78 @@ export class WaitersPage implements OnInit {
   // calculateTipsPage() {
   //   console.log('calculate tips');
   // }
-  async addWaiter() {
+  async addPoints() {
     const modal = await this.modalController.create({
-      component: AddTipsComponent
+      component: AddPointsComponent
     });
     return await modal.present();
   }
-  async minIngrediantError() {
-    const toast = await this.toastController.create({
-      message: 'You need at least one waiter.',
-      duration: 2000
-    });
-    toast.present();
-  }
-  async seePoints() {
+  async minWaiterError() {
     const alert = await this.alertController.create({
-      header: 'Alert',
+      header: 'You need at least one waiter.',
       subHeader: 'Subtitle',
       message: 'This is an alert message.',
       buttons: ['OK']
     });
     await alert.present();
   }
-  async addPoints() {
-    const actionSheet = await this.actionSheetController.create({
-      header: 'Albums',
-      buttons: [{
-        text: 'Delete',
-        role: 'destructive',
-        icon: 'trash',
-        handler: () => {
-          console.log('Delete clicked');
-        }
-      }, {
-        text: 'Share',
-        icon: 'share',
-        handler: () => {
-          console.log('Share clicked');
-        }
-      }, {
-        text: 'Play (open modal)',
-        icon: 'arrow-dropright-circle',
-        handler: () => {
-          console.log('Play clicked');
-        }
-      }, {
-        text: 'Favorite',
-        icon: 'heart',
-        handler: () => {
-          console.log('Favorite clicked');
-        }
-      }, {
-        text: 'Cancel',
-        icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      }]
-    });
-    await actionSheet.present();
-  }
+  // async addPoints() {
+  //   const actionSheet = await this.actionSheetController.create({
+  //     header: 'Albums',
+
+  //     //       inputs: [
+  //     //   {
+  //     //     type: 'checkbox',
+  //     //     label: 'Waiter can provide exellent wine service',
+  //     //     value: 0.5
+  //     //   },
+  //     //   {
+  //     //     type: 'checkbox',
+  //     //     label: 'Waiter is able to answer the phone and take online orders',
+  //     //     value: 0.5
+  //     //   },
+  //     //   {
+  //     //     type: 'checkbox',
+  //     //     label: 'Staff has more than six months on the position',
+  //     //     value: 0.5
+  //     //   },
+  //     // ],
+  //     // buttons: [{
+  //     //   text: 'Delete',
+  //     //   role: 'destructive',
+  //     //   icon: 'trash',
+  //     //   handler: () => {
+  //     //     console.log('Delete clicked');
+  //     //   }
+  //     // }, {
+  //     //   text: 'Share',
+  //     //   icon: 'share',
+  //     //   handler: () => {
+  //     //     console.log('Share clicked');
+  //     //   }
+  //     // }, {
+  //     //   text: 'Play (open modal)',
+  //     //   icon: 'arrow-dropright-circle',
+  //     //   handler: () => {
+  //     //     console.log('Play clicked');
+  //     //   }
+  //     // }, {
+  //     //   text: 'Favorite',
+  //     //   icon: 'heart',
+  //     //   handler: () => {
+  //     //     console.log('Favorite clicked');
+  //     //   }
+  //     // }, {
+  //     //   text: 'Cancel',
+  //     //   icon: 'close',
+  //     //   role: 'cancel',
+  //     //   handler: () => {
+  //     //     console.log('Cancel clicked');
+  //     //   }
+  //     // }]
+  //   });
+  //   await actionSheet.present();
+  // }
   // async addPoints() {
   //   const alert = await this.alertController.create({
   //     header: 'Waiters performance meter',

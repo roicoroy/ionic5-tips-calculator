@@ -6,6 +6,10 @@ export interface Waiter {
 export interface Tips {
     amount: number;
 }
+export interface Points {
+    criteria: string;
+    pontuation: number;
+}
 export interface Week {
     monday: string;
     tuesday: string;

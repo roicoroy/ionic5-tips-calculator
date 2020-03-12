@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color='primaryW'>
+    <ion-button (click)="back()" expand="block" fill="clear" shape="round">
+      Back
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-text color="primary">
+          <h1>Insert the tips of today</h1>
+        </ion-text>
+      </ion-col>
+      <ion-col size="12">
+        <ion-input type="text" placeholder="Tips Today"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngFor='let w of waiters'>
+      <ion-col size="4" class='col-name'>
+        {{ w.name}}
+      </ion-col>
+      <ion-col size="4" class='col-points'>
+        {{w.points}}
+      </ion-col>
+      <ion-col size="4" class='col-hours'></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="calculateEquation()" expand="block" fill="clear" shape="round">
+          Calculate Equation
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

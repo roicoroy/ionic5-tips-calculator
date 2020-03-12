@@ -1,3 +1,16 @@
-<p>
-  add-points works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar class='ion-text-center'>
+    <ion-button (click)="dismiss()" expand="block" fill="clear" shape="round">
+      Finished
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let entry of form">
+      <ion-label>{{entry.criteria}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.pontuation"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+  {{ form | json }}
+</ion-content>
