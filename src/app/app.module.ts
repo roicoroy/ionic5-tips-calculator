@@ -5,6 +5,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { WheelSelector } from '@ionic-native/wheel-selector/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -15,6 +16,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
     IonicSelectableModule
   ],
   providers: [
+    WheelSelector,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

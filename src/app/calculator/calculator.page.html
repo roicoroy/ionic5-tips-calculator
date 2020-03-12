@@ -27,7 +27,11 @@
       <ion-col size="4" class='col-points'>
         {{w.points}}
       </ion-col>
-      <ion-col size="4" class='col-hours'></ion-col>
+      <ion-col *ngIf='!w.hours' size="4" class='col-hours'>
+        <ion-button expand="block" fill="clear" shape="round" (click)='addHours()'>
+          Select Hours
+        </ion-button>
+      </ion-col>
     </ion-row>
 
     <ion-row>
