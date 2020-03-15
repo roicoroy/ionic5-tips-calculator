@@ -51,7 +51,7 @@ export class WaitersPage implements OnInit {
     return this.formBuilder.group({
       name: [''],
       // points: [''],
-    });
+    });``
   }
   addNewWaiterField(): void {
     const control = this.waitersForm.controls.waiterList as FormArray;
