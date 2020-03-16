@@ -1,78 +1,55 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color='primaryW'>
-    <ion-button (click)="back()" expand="block" fill="clear" shape="round">
-      Back
-    </ion-button>
+  <ion-toolbar color='secondary'>
+    <ion-title color='dark'>Calculator</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid fixed>
+<ion-content color='tertiary'>
+  <ion-grid>
 
-    <!-- {{ form | json }} -->
-          
-
-
-    <form class="upload-form" [formGroup]="calculateForm" (submit)="calculateEquation()" novalidate>
-
-      <div formArrayName="calculate">
-        <ion-row [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
-     
-          <!-- <ion-col size="5" class='border' *ngFor='let item of form'>
-            <ion-label color='dark' position='stacked'>{{item.text.name}}</ion-label>
-            <ion-input type="text" maxlength="50" ></ion-input>
-          </ion-col> -->
-          <!-- <ion-col size="5" class='border'>
-            <ion-label color='dark' position='stacked'>Points</ion-label>
-            <ion-input type="number" formControlName="points" placehoolder="Points"></ion-input>
-          </ion-col>
-          <ion-col size="2">
-            <span class='remove-btn' (click)="removeField(i)">
-              <ion-icon name="remove-circle"></ion-icon>
-            </span>
-          </ion-col> -->
-        </ion-row>
-      </div>
-
+    <form (ngSubmit)="submitForm()" [formGroup]="myGroup">
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="waiter.name" name="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Points</ion-label>
+        <ion-textarea [(ngModel)]="waiter.points" name="points"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf='!resultHours'>
+        <ion-button (click)="addHours()" expand="block" fill="clear" shape="round">
+          add Hours
+        </ion-button>
+      </ion-item>
+      <ion-item *ngIf='resultHours'>
+        <ion-text color="primary" *ngFor='let i of resultHours' [(ngModel)]='waiter.hours' formControlName="hours" [ngModelOptions]="{standalone: true}">
+          <span>{{ i.hours.text }} hour </span>
+          <span>{{ i.minutes.text }} minutes</span>
+        </ion-text>
+      </ion-item>
+      <ion-button ion-button type="submit" block>Calculate</ion-button>
     </form>
 
 
-
-    <!-- <ion-row>
-      <ion-col size="12">
-        <ion-text color="primary">
-          <h1>Insert the tips of today</h1>
-        </ion-text>
-      </ion-col>
-      <ion-col size="12">
-        <ion-input type="number" placeholder="Tips Today"></ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row *ngFor='let w of waiters'>
-      <ion-col size="4" class='col-name'>
-        {{ w.name}}
-      </ion-col>
-      <ion-col size="4" class='col-points'>
-        {{w.points}}
-      </ion-col>
-      <ion-col size="4" class='col-hours'>
-        <ion-button *ngIf='!time' expand="block" fill="clear" shape="round" (click)='addHours()'>
-          Select Hours
-        </ion-button>
-        <ion-text color="primary" *ngFor='let t of time'>
-          <h1>{{ t.hours.text }} {{ t.minutes.text }}</h1>
-        </ion-text>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        <ion-button (click)="calculateEquation()" expand="block" fill="clear" shape="round">
-          Calculate Equation
-        </ion-button>
-      </ion-col>
-    </ion-row> -->
-
+    <!-- <form class="upload-form" [formGroup]="form" (submit)="submitForm()" novalidate>
+      <ion-row *ngFor='let w of waiters' class='ion-text-center'>
+        <ion-col size="4" formControlName="name"  [(ngModel)]='form.name'>
+          {{ w.name }}
+        </ion-col>
+        <ion-col size="4">
+          {{ w.points }}
+        </ion-col>
+        <ion-col size="4">
+          {{ w.hours }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-button type='submit' expand="block" fill="clear" shape="round" color='dark'>
+            Calculate
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form> -->
   </ion-grid>
 </ion-content>

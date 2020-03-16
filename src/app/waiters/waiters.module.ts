@@ -8,6 +8,7 @@ import { WaitersPage } from './waiters.page';
 import { AddTipsComponent } from './add-tips/add-tips.component';
 import { AddPointsComponent } from './add-points/add-points.component';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { AddHoursComponent } from './add-hours/add-hours.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -19,12 +20,14 @@ import { IonicSelectableModule } from 'ionic-selectable';
   ],
   entryComponents: [
     AddTipsComponent,
-    AddPointsComponent
+    AddPointsComponent,
+    AddHoursComponent
   ],
   declarations: [
     WaitersPage,
     AddTipsComponent,
-    AddPointsComponent
+    AddPointsComponent,
+    AddHoursComponent
   ],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
 })
