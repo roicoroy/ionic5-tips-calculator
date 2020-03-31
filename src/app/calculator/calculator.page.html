@@ -5,5 +5,67 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="calculatorForm" (submit)="submitForm()" novalidate>
+    <ion-grid fixed class='ion-text-center' formArrayName="waiterList">
+      <ion-row [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
 
+        <ion-col class='border'>
+          <ion-label color='dark' position='stacked'>Name</ion-label>
+          <ion-input type="text" maxlength="50" formControlName="name" placehoolder="Name"></ion-input>
+        </ion-col>
+
+        <ion-col class='border'>
+          <ion-label color='dark' position='stacked'>Points</ion-label>
+          <ion-input type="number" maxlength="50" formControlName="points" placehoolder="Points"></ion-input>
+        </ion-col>
+
+        <ion-col class='border'>
+          <ion-list>
+            <ion-item>
+              <div class='btn'>
+                <!-- <input formControlName="hours" (click)="addHours()" > -->
+                <ion-button (click)="addHours()" expand="block" fill="clear" shape="round">
+                  Add Hours
+                </ion-button>
+              </div>
+              
+
+              <!-- <ion-button (click)="addHours()" expand="block" fill="clear" shape="round" formControlName="hours">
+                Add Hpurs
+              </ion-button> -->
+              <!-- <ion-label>Hours</ion-label>
+              <ion-select okText="Okay" cancelText="Dismiss" formControlName="hours">
+                <ion-select-option value=1>1</ion-select-option>
+                <ion-select-option value=2>2</ion-select-option>
+                <ion-select-option value=3>3</ion-select-option>
+                <ion-select-option value=4>4</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+          </ion-list>
+        </ion-col>
+
+
+        <ion-col size="2">
+          <span class='remove-btn' (click)="removeWaiterField(i)">
+            <ion-icon name="remove-circle"></ion-icon>
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-button (click)="addNewWaiterField()" color="dark">
+            <ion-icon slot="start" name="add-circle"></ion-icon>
+            Add waiter
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row class='submit-row'>
+        <ion-col>
+          <ion-button disabled='false' shape="round" expand="block" fill="solid" color="dark" type='submit'>
+            Calculator
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
