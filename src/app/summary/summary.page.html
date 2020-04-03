@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color='primary'>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="calculator"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color='success'>
+  <ion-grid>
+    <ion-row class='waiters-container-row'>
+      <div class="header-container  ion-text-center">
+        <ion-col size="4">
+          <ion-text color="dark">
+            Name
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            Points
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            Hours
+          </ion-text>
+        </ion-col>
+      </div>
+      <div class='waiters-container ion-text-center' *ngFor='let waiter of waitersList'>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.name}}
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.points}}
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.hours}}
+          </ion-text>
+        </ion-col>
+      </div>
+    </ion-row>
+    <ion-row class='results-row'>
+      <div class="results-header-container  ion-text-center">
+        <ion-col size="4">
+          <ion-text color="dark">
+            Name
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            Points
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            Hours
+          </ion-text>
+        </ion-col>
+      </div>
+      <div class='results-waiters-container ion-text-center' *ngFor='let waiter of waitersList'>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.name}}
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.points}}
+          </ion-text>
+        </ion-col>
+        <ion-col size="4">
+          <ion-text color="dark">
+            {{waiter.hours}}
+          </ion-text>
+        </ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color='dark'>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

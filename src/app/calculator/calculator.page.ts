@@ -1,31 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
-import { PickerOptions } from '@ionic/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-export interface PickerColumn {
-  name: string;
-  align?: string;
-  selectedIndex?: number;
-  prevSelected?: number;
-  prefix?: string;
-  suffix?: string;
-  options: PickerColumnOption[];
-  cssClass?: string | string[];
-  columnWidth?: string;
-  prefixWidth?: string;
-  suffixWidth?: string;
-  optionsWidth?: string;
-  refresh?: () => void;
-}
-export interface PickerColumnOption {
-  text?: string;
-  value?: any;
-  disabled?: boolean;
-  duration?: number;
-  transform?: string;
-  selected?: boolean;
+import { StorageService } from '../services/storage.service';
+import { Plugins } from '@capacitor/core';
+const { Storage } = Plugins;
+export interface Waiter {
+  name?: string,
+  points?: number,
+  hours?: number
 }
 @Component({
   selector: 'app-calculator',
@@ -33,122 +17,183 @@ export interface PickerColumnOption {
   styleUrls: ['./calculator.page.scss'],
 })
 export class CalculatorPage implements OnInit {
-  waiters: any = [];
-  test;
-  form;
-  waiter: any = {};
+  waitersForm: FormGroup;
+  waiters: Waiter;
+  waitersPoints;
+  waitersArray: any = [];
+  waiter: any = '';
   resultHours;
-  ingredients = [
-    { name: 'Jalapenos', isChecked: false },
-    { name: 'Pepperoni', isChecked: true },
-    { name: 'Sausage', isChecked: false },
-    { name: 'Mushrooms', isChecked: false },
-  ];
-  myGroup;
+  waitersDataInit;
+  pointsDataInit;
+  hoursDataInit;
+
   constructor(
     private router: Router,
     public alertController: AlertController,
     private pickerController: PickerController,
     private formBuilder: FormBuilder,
+    private storage: StorageService
   ) {
-    this.myGroup = new FormGroup({
-      hours: new FormControl()
-   });
-    // this.form = new FormGroup({
-    //   name: new FormControl(''),
-    //   points: new FormControl(''),
-    //   hours: new FormControl(''),
-    // });
-    // this.waiters.push(
-    //   {
-    //     name: 'Ricardo',
-    //     points: 2.5,
-    //     hours: 30,
-    //   },
-    //   {
-    //     name: 'Jose',
-    //     points: 0.5,
-    //     hours: 27,
-    //   },
-    //   {
-    //     name: 'Maria',
-    //     points: 1.5,
-    //     hours: 35,
-    //   }
-    // );
+    this.waitersForm = formBuilder.group({
+      waiterList: this.formBuilder.array([
+        this.initWaiters(),
+      ]),
+    });
+    this.waitersDataInit = [
+      {
+        name: 'Jose',
+        points: 1.5,
+        hours: 29
+      },
+      {
+        name: 'Ricardo',
+        points: 3,
+        hours: 37
+      },
+      {
+        name: 'Neuza',
+        points: 0.5,
+        hours: 14.5
+      }
+    ]
+    this.pointsDataInit = [
+      {
+        id: 1,
+        criteria: 'Speak good English',
+        points: 0.5
+      },
+      {
+        id: 2,
+        criteria: 'Serve Wine',
+        points: 0.5
+      },
+      {
+        id: 3,
+        criteria: 'Answer phone',
+        points: 0.5
+      }
+    ];
+    this.hoursDataInit = [
+      {
+        id: 1,
+        time: 1
+      },
+      {
+        id: 2,
+        time: 2
+      },
+      {
+        id: 3,
+        time: 3
+      },
+      {
+        id: 3,
+        time: 3
+      },
+      {
+        id: 4,
+        time: 4
+      },
+      {
+        id: 5,
+        time: 5
+      },
+      {
+        id: 6,
+        time: 6
+      },
+    ];
+  }
+  initWaiters(): FormGroup {
+    return this.formBuilder.group({
+      name: [''],
+      points: [''],
+      hours: [''],
+    });
+  }
+  addNewWaiterField(): void {
+    const control = this.waitersForm.controls.waiterList as FormArray;
+    control.push(this.initWaiters());
+  }
+  removeWaiterField(i: number): void {
+    const control = this.waitersForm.controls.waiterList as FormArray;
+    if (control.length > 1) {
+      control.removeAt(i);
+    }
+    else {
+      this.minWaiterError();
+    }
+  }
+  get formData() {
+    return this.waitersForm.get('waiterList') as FormArray;
   }
   ngOnInit() {
   }
-  submitForm() {
-    console.log(this.waiter);
-  }
+  buidlFormData() {
 
-  async addHours() {
-    const picker = await this.pickerController.create({
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Ok',
-          handler: (value: any) => {
-            if (value) {
-              // this.resultHours = value.hours.value;
-              // this.initHours(value.hours);
-              this.resultHours = [
-                {
-                  hours: value.hours,
-                  minutes: value.minutes,
-                }
-              ];
-              console.log(this.resultHours);
-              return;
-            }
+  }
+  buildWaitersArray() {
+    this.waitersArray = [];
+    let waitersList = this.waitersForm.value.waiterList;
+    waitersList.forEach(
+      waitersList => {
+        if (waitersList.points) {
+          let pointsTotal = waitersList.points.reduce(function (prev, cur) {
+            return prev + cur.points;
+          }, 0);
+          let myWaiter: Waiter = {
+            name: waitersList.name,
+            points: pointsTotal,
+            hours: waitersList.hours.time,
           }
+          this.waitersArray.push(myWaiter);
+          this.storage.setItem('waitersList', this.waitersArray).then(() => {
+            this.router.navigateByUrl('summary');
+          });
         }
-      ],
-      columns: [
-        {
-          name: 'hours',
-          options: [
-            {
-              text: '1',
-              value: 1
-            },
-            {
-              text: '2',
-              value: 2
-            },
-            {
-              text: '3',
-              value: 3
-            },
-          ]
-        },
-        {
-          name: 'minutes',
-          options: [
-            {
-              text: '00',
-              value: 0
-            },
-            {
-              text: '25',
-              value: 25
-            },
-            {
-              text: '50',
-              value: 50
-            },
-            {
-              text: '75',
-              value: 75
-            },
-          ]
-        },
-      ]
+        if (!waitersList.name) {
+          this.errorHandler(`Waiter doen't name`);
+        }
+        if (!waitersList.hours) {
+          this.errorHandler(`Waiter doen't hours`);
+        }
+        if (!waitersList.points) {
+          this.errorHandler(`Waiter doen't ponits`);
+        }
+        else {
+
+        }
+      },
+      error => this.errorHandler(error),
+    );
+  }
+  calculate() {
+    if (this.waitersForm.value.waiterList.length >= 1) {
+      this.buildWaitersArray();
+    }
+  }
+  clear() {
+    if (this.waitersForm.valid) {
+      this.waitersForm.reset();
+      this.waitersArray = '';
+      Storage.clear();
+    }
+  }
+  async minWaiterError() {
+    const alert = await this.alertController.create({
+      header: 'You need at least one waiter..',
+      buttons: ['OK']
     });
-    await picker.present();
+    await alert.present();
+  }
+  async handleErrorAlert(message) {
+    const alert = await this.alertController.create({
+      header: message,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+  errorHandler(error) { 
+    this.handleErrorAlert(error);
   }
 }

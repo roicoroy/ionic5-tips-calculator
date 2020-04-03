@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CalculatorPageRoutingModule } from './calculator-routing.module';
 
 import { CalculatorPage } from './calculator.page';
+import { CustomComponentsModule } from '../components/custom-components.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { CalculatorPage } from './calculator.page';
     FormsModule,
     IonicModule,
     CalculatorPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CustomComponentsModule
   ],
   declarations: [CalculatorPage]
 })

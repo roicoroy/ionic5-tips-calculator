@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./waiters/waiters.module').then(m => m.WaitersPageModule)
   },
   {
+    path: 'summary',
+    loadChildren: () => import('./summary/summary.module').then(m => m.SummaryPageModule)
+  },
+  {
     path: 'form',
     loadChildren: () => import('./form/form.module').then(m => m.FormPageModule)
   },
