@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SummaryPageRoutingModule } from './summary-routing.module';
 
 import { SummaryPage } from './summary.page';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,12 @@ import { SummaryPage } from './summary.page';
     IonicModule,
     SummaryPageRoutingModule
   ],
-  declarations: [SummaryPage]
+  declarations: [
+    SummaryPage,
+    ResultComponent
+  ],
+  entryComponents:[
+    ResultComponent
+  ]
 })
 export class SummaryPageModule {}

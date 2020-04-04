@@ -3,6 +3,8 @@ import { StorageService } from '../services/storage.service';
 import { throwError, Observable, from } from 'rxjs';
 import { Plugins } from '@capacitor/core';
 import { Router } from '@angular/router';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { ResultComponent } from './result/result.component';
 const { Storage } = Plugins;
 @Component({
   selector: 'app-summary',
@@ -10,23 +12,43 @@ const { Storage } = Plugins;
   styleUrls: ['./summary.page.scss'],
 })
 export class SummaryPage implements OnInit {
-  summaryList;
+  summaryList = true;
   waitersList;
+  tipsToday;
+  loaderToShow;
   constructor(
     private storageService: StorageService,
-    private router: Router
+    private router: Router,
+    private storage: StorageService,
+    private modalController: ModalController,
+    public loadingController: LoadingController
   ) { }
-
-  ngOnInit() {
-    this.getItem();
+  ionViewWillEnter() {
+    this.getWaiters();
+    this.getTips();
   }
-  async getItem(key: string = 'waitersList') {
+  ngOnInit() {
+  }
+  async  openModal() {
+    const modal = await this.modalController.create({
+      component: ResultComponent,
+      componentProps: {
+        'tipsToday': this.tipsToday
+      }
+    });
+    return await modal.present();
+  }
+  calculate() {
+     this.openModal();
+  }
+  async getTips(key: string = 'tipsToday') {
+    return await Storage.get({ key }).then((watiersListResponse: any) => {
+      this.tipsToday = JSON.parse(watiersListResponse.value);
+    });
+  }
+  async getWaiters(key: string = 'waitersList') {
     return await Storage.get({ key }).then((watiersListResponse: any) => {
       this.waitersList = JSON.parse(watiersListResponse.value);
-      // myList.forEach(element => {
-      //   this.waitersList = element;
-      //   console.log(element);
-      // });
     });
   }
   back() {

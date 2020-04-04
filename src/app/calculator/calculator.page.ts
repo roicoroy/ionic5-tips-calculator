@@ -1,10 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { StorageService } from '../services/storage.service';
 import { Plugins } from '@capacitor/core';
+import { AddTipsComponent } from './add-tips/add-tips.component';
+import { Observable, from } from 'rxjs';
+
 const { Storage } = Plugins;
 export interface Waiter {
   name?: string,
@@ -18,6 +21,7 @@ export interface Waiter {
 })
 export class CalculatorPage implements OnInit {
   waitersForm: FormGroup;
+  tipsForm: FormGroup;
   waiters: Waiter;
   waitersPoints;
   waitersArray: any = [];
@@ -26,11 +30,12 @@ export class CalculatorPage implements OnInit {
   waitersDataInit;
   pointsDataInit;
   hoursDataInit;
-
+  tipsToday: number;
   constructor(
     private router: Router,
     public alertController: AlertController,
     private pickerController: PickerController,
+    public modalController: ModalController,
     private formBuilder: FormBuilder,
     private storage: StorageService
   ) {
@@ -38,6 +43,9 @@ export class CalculatorPage implements OnInit {
       waiterList: this.formBuilder.array([
         this.initWaiters(),
       ]),
+    });
+    this.tipsForm = formBuilder.group({
+      tips: [''],
     });
     this.waitersDataInit = [
       {
@@ -128,6 +136,17 @@ export class CalculatorPage implements OnInit {
     return this.waitersForm.get('waiterList') as FormArray;
   }
   ngOnInit() {
+
+  }
+  ionViewWillEnter() {
+    this.storage.getTipsFromPromise().then(
+      () => this.buildtips(),
+    );
+  }
+  buildtips() {
+    return this.storage.tipsData.subscribe(
+      (tipsTodayResponse: any) => this.tipsToday = JSON.parse(tipsTodayResponse),
+    );
   }
   buidlFormData() {
 
@@ -151,25 +170,30 @@ export class CalculatorPage implements OnInit {
             this.router.navigateByUrl('summary');
           });
         }
-        if (!waitersList.name) {
-          this.errorHandler(`Waiter doen't name`);
-        }
-        if (!waitersList.hours) {
-          this.errorHandler(`Waiter doen't hours`);
-        }
-        if (!waitersList.points) {
-          this.errorHandler(`Waiter doen't ponits`);
-        }
-        else {
-
-        }
+        // if (!waitersList.name) {
+        //   this.errorHandler(`Waiter needs a name`);
+        // }
+        // if (!waitersList.hours) {
+        //   this.errorHandler(`Waiter needs hours`);
+        // }
+        // if (!waitersList.points) {
+        //   this.errorHandler(`Waiter needs ponits`);
+        // }
       },
       error => this.errorHandler(error),
     );
   }
-  calculate() {
+  tipsSubmit() {
+    if (this.tipsToday && this.tipsToday != null) {
+      this.storage.setItem('tipsToday', this.tipsToday).then((data) => {
+        console.log(data);
+      });
+    }
+  }
+  summaryPage() {
     if (this.waitersForm.value.waiterList.length >= 1) {
       this.buildWaitersArray();
+      this.router.navigateByUrl('summary');
     }
   }
   clear() {
@@ -193,7 +217,13 @@ export class CalculatorPage implements OnInit {
     });
     await alert.present();
   }
-  errorHandler(error) { 
+  errorHandler(error) {
     this.handleErrorAlert(error);
+  }
+  async addTipsModal() {
+    const modal = await this.modalController.create({
+      component: AddTipsComponent
+    });
+    return await modal.present();
   }
 }
