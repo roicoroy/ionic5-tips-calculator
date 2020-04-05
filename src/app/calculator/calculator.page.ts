@@ -14,26 +14,26 @@ import { DatasService } from '../services/data.service';
 })
 export class CalculatorPage implements OnInit {
   loggedUser;
+  dataTips;
   constructor(
-    private router: Router,
     private auth: AuthService,
-    private storage: StorageService,
     private data: DatasService
   ) {
   }
   ionViewWillEnter() {
-    this.auth.getUserData().then(
-      (responseUser) => this.loggedUser = responseUser,
-      (error) => this.handleError(error),
-    );
+    this.auth.getUserData()
+      .then(
+        (responseUser) => this.loggedUser = responseUser,
+        (error) => this.handleError(error),
+      );
     this.getTipsData();
   }
   getTipsData() {
-    this.data.getTips().subscribe(
-      (data) => {
-
-      },
-    );
+    this.data.getTips()
+      .subscribe(
+        (responseTips) => this.dataTips = responseTips,
+        (error) => this.handleError(error),
+      );
   }
   ngOnInit() {
   }

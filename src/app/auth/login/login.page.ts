@@ -30,7 +30,6 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       this.auth.loginStrapiUser(this.loginForm)
         .subscribe((response: any) => {
-          console.log(response);
           if (response.jwt) {
             this.storage.setItem('token', response.jwt)
               .then(
