@@ -1,25 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Plugins } from '@capacitor/core';
-import { logging } from 'protractor';
-import { Observable, from } from 'rxjs';
+import { throwError, Observable, from, BehaviorSubject } from 'rxjs';
 const { Storage } = Plugins;
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
+  public tipsData: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   constructor() { }
   async setItem(key, value) {
     const myvalue = JSON.stringify(value);
     return await Storage.set({
       key,
-      value: myvalue,
+      value: myvalue
     });
   }
   async getItem(key: any) {
-    const ret = await Storage.get({ key });
-    const data = JSON.parse(ret.value);
-    return data;
+    return await Storage.get({ key });
   }
   async removeItem() {
     await Storage.remove({ key: 'name' });
@@ -31,7 +29,30 @@ export class StorageService {
   async clear() {
     await Storage.clear();
   }
-  getTokenAsObservable(key): Observable<any> {
-    return from(this.getItem(key));
+  async getTipsFromPromise(): Promise<any> {
+    await Storage.get({ key: 'tipsToday' })
+      .then(
+        (response: any) => {
+          console.log(response.value);
+          return this.tipsData.next(JSON.parse(response.value));
+        },
+        (error) => {
+          return throwError(error);
+        }
+      );
+  }
+  async getFromPromise(key): Promise<any> {
+    await Storage.get({ key })
+      .then(
+        (response) => {
+          return response.value;
+        },
+        (error) => {
+          return throwError(error);
+        }
+      );
+  }
+  getAsObservable(key): Observable<any> {
+    return from(this.getFromPromise(key));
   }
 }
