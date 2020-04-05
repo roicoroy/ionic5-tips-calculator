@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { WheelSelector } from '@ionic-native/wheel-selector/ngx';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from './services/interceptor';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -13,11 +16,15 @@ import { WheelSelector } from '@ionic-native/wheel-selector/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     WheelSelector,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
