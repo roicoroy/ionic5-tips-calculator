@@ -7,7 +7,6 @@ import { StorageService } from '../services/storage.service';
 import { Plugins } from '@capacitor/core';
 import { AddTipsComponent } from './add-tips/add-tips.component';
 import { Observable, from } from 'rxjs';
-
 const { Storage } = Plugins;
 export interface Waiter {
   name?: string,
@@ -63,7 +62,7 @@ export class CalculatorPage implements OnInit {
         points: 0.5,
         hours: 14.5
       }
-    ]
+    ];
     this.pointsDataInit = [
       {
         id: 1,

@@ -42,7 +42,7 @@ export class StorageService {
       );
   }
   async getFromPromise(key): Promise<any> {
-    await Storage.get({ key: key })
+    await Storage.get({ key })
       .then(
         (response) => {
           return response.value;
