@@ -9,7 +9,8 @@ export const environment = {
   register: '',
   logout: '',
   tips: 'tips/',
-  tips_todays: 'tips-todays/'
+  tips_todays: 'tips-todays/',
+  set_dates: 'set-dates'
 };
 
 /*

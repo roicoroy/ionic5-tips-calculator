@@ -1,52 +1,121 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>calculator-slides</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content color='dark'>
+  <ion-grid>
+    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
+      <ion-slide class='slide-date'>
 
-<ion-content>
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
-    
-    <ion-slide class='slide-date'>
-      <img src="assets/logo.svg" class="slide-image" />
-      <h2 class="slide-title">
-        Welcome to
-        <b>ICA</b>
-      </h2>
-      <p>
-        The
-        <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of
-        proper code
-        use.
-      </p>
-    </ion-slide>
+        <ion-row>
+          <form [formGroup]="dateForm" novalidate>
 
-    <ion-slide class='slide-waiters'>
-      <img src="assets/logo.svg" class="slide-image" />
-      <h2 class="slide-title">What is Ionic?</h2>
-      <p>
-        <b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with
-        web technologies
-        like HTML, CSS, and JavaScript.</p>
-    </ion-slide>
+            <ion-col size="12" *ngIf='date'>
+              <img src="assets/logo.svg" class="slide-image" />
+              <ion-item>
+                <ion-label>Your date is:</ion-label>
+                {{ date }}
+              </ion-item>
+              <ion-button [disabled]='fromDate' (click)="submitDate()" expand="block" fill="outline" shape="round">
+                Submit Date
+              </ion-button>
+            </ion-col>
 
-    <ion-slide class='slide-points'>
-      <img src="assets/logo.svg" class="slide-image" />
-      <h2 class="slide-title">What is Ionic Appflow?</h2>
-      <p>
-        <b>Ionic Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a
-        totally new
-        level of app development agility to mobile dev teams.</p>
-    </ion-slide>
+            <ion-col size="12" *ngIf='fromDate'>
+              <img src="assets/logo.svg" class="slide-image" />
+              <ion-text color="primary">
+                <h1>Move to the next slide</h1>
+              </ion-text>
+              <ion-button (click)="nextSlide()" expand="block" fill="outline" shape="round">
+                Next
+              </ion-button>
+            </ion-col>
 
-    <ion-slide class='slide-hours'>
-      <img src="assets/logo.svg" class="slide-image" />
-      <h2 class="slide-title">Ready to Play?</h2>
-      <ion-button fill="clear" (click)="startApp()">
-        Continue
-        <ion-icon slot="end" name="arrow-forward"></ion-icon>
-      </ion-button>
-    </ion-slide>
+            <ion-col size="12" *ngIf='!date && !fromDate'>
+              <img src="assets/logo.svg" class="slide-image" />
+              <ion-item>
+                <ion-label>Pick your date</ion-label>
+                <ion-datetime formControlName="date" [pickerOptions]="customPickerOptions" displayFormat="MM-DD-YYYY"
+                  min="2019" max="2022">
+                </ion-datetime>
+              </ion-item>
+            </ion-col>
 
-  </ion-slides>
+          </form>
+        </ion-row>
+      </ion-slide>
+
+      <ion-slide class='slide-waiters'>
+        <img src="assets/logo.svg" class="slide-image" />
+        <form [formGroup]="waitersForm" novalidate>
+          <ion-row>
+            <ion-col size="12" class='ingredients-col'>
+              <div formArrayName="waiters">
+                <section [formGroupName]="i" *ngFor="let item of formWaitersData.controls; let i = index">
+                  <ion-item-group>
+                    <ion-row class='ion-align-items-center'>
+                      <ion-col size='5'>
+                        <ion-item>
+                          <ion-label class='label-text-size-small input-text-color brand-oswald ion-text-uppercase'
+                            position='stacked'>First Name</ion-label>
+                          <ion-input class='input-text-color' type="text" maxlength="50" formControlName="first_name"
+                            placehoolder="Your first name">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size='5'>
+                        <ion-item>
+                          <ion-label class='label-text-size-small brand-oswald ion-text-uppercase' position='stacked'>
+                            Last Name
+                          </ion-label>
+                          <ion-input class='input-text-color' type="text" maxlength="50" formControlName="last_name"
+                            placehoolder="Your last name">
+                          </ion-input>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col size='2'>
+                        <ion-button fill="clear" (click)="removeWaiters(i)">
+                          <ion-icon color='light' name="remove-circle"></ion-icon>
+                        </ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item-group>
+                </section>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col class="ion-text-center">
+              <ion-button class='brand-oswald ion-text-uppercase' shape="round" fill="clear" color="light"
+                (click)="addNewWaiters()">
+                <ion-icon slot="start" name="add-circle"></ion-icon>
+                <ion-text class='label-text-size' color='light'>
+                  <span>Add Waiter</span>
+                </ion-text>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+          <div class='button-container ion-text-center'>
+            <ion-button shape="round" expand="block" fill="solid" color="primary" (click)='submitWaiters()'>
+              <ion-text class='brand-header-text'>
+                <span>Submit Waiters</span>
+              </ion-text>
+            </ion-button>
+          </div>
+        </form>
+      </ion-slide>
+
+      <ion-slide class='slide-hours'>
+        <ion-row>
+          <ion-col size="12">
+            <img src="assets/logo.svg" class="slide-image" />
+            <h2 class="slide-title">Ready to Play?</h2>
+            <ion-button disabled='true' fill="clear" (click)="startApp()">
+              Continue
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+    </ion-slides>
+
+
+  </ion-grid>
 </ion-content>

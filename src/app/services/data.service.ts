@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, BehaviorSubject } from 'rxjs';
-
+import * as moment from 'moment';
 @Injectable({
     providedIn: 'root'
 })
@@ -39,5 +39,12 @@ export class DatasService {
         return this.http.post(environment.api_url + environment.tips, { headers: this.headers })
             .subscribe((responseData: any) => {
             });
+    }
+    postDate(dateForm): Observable<any> {
+        console.log(dateForm);
+        let date = {
+            date: dateForm,
+        }
+        return this.http.post(environment.api_url + environment.set_dates, JSON.stringify(date), { headers: this.headers });
     }
 }

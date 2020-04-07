@@ -21,7 +21,6 @@ export class TokenInterceptor implements HttpInterceptor {
         if (this.storage.getTokenAsObservable()) {
             return this.storage.getTokenAsObservable().pipe(
                 mergeMap(token => {
-                    console.log(token);
                     let clonedReq = this.addToken(request, token);
                     return next.handle(clonedReq);
                 }),
@@ -33,7 +32,6 @@ export class TokenInterceptor implements HttpInterceptor {
     }
     private addToken(request: HttpRequest<any>, token: any) {
         if (token) {
-            console.log(token);
             let clone: HttpRequest<any>;
             clone = request.clone({
                 setHeaders: {
