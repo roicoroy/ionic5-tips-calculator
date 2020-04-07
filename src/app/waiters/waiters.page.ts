@@ -8,7 +8,6 @@ import { StorageService } from '../services/storage.service';
 import { Plugins } from '@capacitor/core';
 import { from, Observable } from 'rxjs';
 import { FormBuilder, FormControl, Validators, FormGroup, FormArray } from '@angular/forms';
-import { Waiter, Points } from '../interfaces/intefaces';
 import { AddPointsComponent } from './add-points/add-points.component';
 const { Storage } = Plugins;
 

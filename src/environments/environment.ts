@@ -5,10 +5,11 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:1337/',
-  login: '',
+  login: 'auth/local/',
   register: '',
   logout: '',
-  tips: 'tips'
+  tips: 'tips/',
+  tips_todays: 'tips-todays/'
 };
 
 /*

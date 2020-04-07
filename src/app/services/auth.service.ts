@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { StorageService } from './storage.service';
+import { Storage } from '@ionic/storage';
 @Injectable({
     providedIn: 'root'
 })
@@ -13,9 +12,8 @@ export class AuthService {
     constructor(
         private router: Router,
         public http: HttpClient,
-        private storage: StorageService
+        private storage: Storage
     ) { }
-
     loginStrapiUser(loginForm) {
         const body: any = {
             identifier: loginForm.value.identifier,
@@ -24,18 +22,16 @@ export class AuthService {
         const loggedUser: any = {
             identifier: loginForm.value.identifier
         };
-        return this.http.post('http://localhost:1337/auth/local/', JSON.stringify(body), { headers: this.headers });
+        return this.http.post(environment.api_url + environment.login, JSON.stringify(body), { headers: this.headers });
     }
     logout() {
-        this.storage.clear().then(() => {
-            this.router.navigateByUrl('login').then(() => console.log('logout'));
-        });
+        if (this.storage.get('token')) {
+            this.storage.clear().then(
+                () => this.router.navigateByUrl('login'),
+            );
+        }
     }
-    // register(onRegisterForm): Observable < any > {
-    //     console.log('logout');
-    //     return;
-    // }
     getUserData(): Promise<any> {
-        return this.storage.getItem('user');
+        return;
     }
 }

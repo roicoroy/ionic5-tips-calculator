@@ -7,6 +7,9 @@ import { StorageService } from '../services/storage.service';
 import { Plugins } from '@capacitor/core';
 import { AddTipsComponent } from './add-tips/add-tips.component';
 import { Observable, from } from 'rxjs';
+import { AuthService } from '../services/auth.service';
+import { DatasService } from '../services/data.service';
+import { TipsCalculator, TipsToday } from '../interfaces/intefaces';
 const { Storage } = Plugins;
 export interface Waiter {
   name?: string,
@@ -30,13 +33,17 @@ export class CalculatorPage implements OnInit {
   pointsDataInit;
   hoursDataInit;
   tipsToday: number;
+  tipsData: TipsCalculator;
+  tipsTodayData: TipsToday
   constructor(
     private router: Router,
     public alertController: AlertController,
     private pickerController: PickerController,
     public modalController: ModalController,
     private formBuilder: FormBuilder,
-    private storage: StorageService
+    private storage: StorageService,
+    private auth: AuthService,
+    private dataService: DatasService
   ) {
     this.waitersForm = formBuilder.group({
       waiterList: this.formBuilder.array([
@@ -138,10 +145,9 @@ export class CalculatorPage implements OnInit {
 
   }
   ionViewWillEnter() {
-    this.storage.getTipsFromPromise().then(
-      () => this.buildtips(),
-    );
+
   }
+
   buildtips() {
     return this.storage.tipsData.subscribe(
       (tipsTodayResponse: any) => this.tipsToday = JSON.parse(tipsTodayResponse),
@@ -165,9 +171,6 @@ export class CalculatorPage implements OnInit {
             hours: waitersList.hours.time,
           }
           this.waitersArray.push(myWaiter);
-          this.storage.setItem('waitersList', this.waitersArray).then(() => {
-            this.router.navigateByUrl('summary');
-          });
         }
         // if (!waitersList.name) {
         //   this.errorHandler(`Waiter needs a name`);
@@ -183,11 +186,11 @@ export class CalculatorPage implements OnInit {
     );
   }
   tipsSubmit() {
-    if (this.tipsToday && this.tipsToday != null) {
-      this.storage.setItem('tipsToday', this.tipsToday).then((data) => {
-        console.log(data);
-      });
-    }
+    // if (this.tipsToday && this.tipsToday != null) {
+    //   this.storage.setItem('tipsToday', this.tipsToday).then((data) => {
+    //     console.log(data);
+    //   });
+    // }
   }
   summaryPage() {
     if (this.waitersForm.value.waiterList.length >= 1) {
@@ -224,5 +227,8 @@ export class CalculatorPage implements OnInit {
       component: AddTipsComponent
     });
     return await modal.present();
+  }
+  logout() {
+    this.auth.logout();
   }
 }

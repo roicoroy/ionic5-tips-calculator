@@ -1,4 +1,4 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { mergeMap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -18,21 +18,22 @@ export class TokenInterceptor implements HttpInterceptor {
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
-        if (this.storage.getTokenAsObservable('token')) {
-            return this.storage.getTokenAsObservable('token')
-                .pipe(
-                    mergeMap((token) => {
-                        const clonedReq = this.addToken(request, token);
-                        return next.handle(clonedReq);
-                    }),
-                    catchError((response) => {
-                        return throwError(response);
-                    }),
-                );
+        if (this.storage.getTokenAsObservable()) {
+            return this.storage.getTokenAsObservable().pipe(
+                mergeMap(token => {
+                    console.log(token);
+                    let clonedReq = this.addToken(request, token);
+                    return next.handle(clonedReq);
+                }),
+                catchError((response: HttpErrorResponse) => {
+                    return throwError(response);
+                })
+            );
         }
     }
     private addToken(request: HttpRequest<any>, token: any) {
         if (token) {
+            console.log(token);
             let clone: HttpRequest<any>;
             clone = request.clone({
                 setHeaders: {

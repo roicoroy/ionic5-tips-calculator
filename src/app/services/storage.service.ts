@@ -1,58 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
 import { throwError, Observable, from, BehaviorSubject } from 'rxjs';
-const { Storage } = Plugins;
-
+import { Storage } from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
   public tipsData: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-  constructor() { }
-  async setItem(key, value) {
-    let myvalue = JSON.stringify(value);
-    return await Storage.set({
-      key: key,
-      value: myvalue
+  constructor(
+    private storage: Storage
+  ) { }
+  async getTokenFromPromise(): Promise<any> {
+    return await this.storage.ready().then(() => {
+      return this.storage.get('token').then(
+        (data) => {
+          return data;
+        },
+        (error) => console.error(error));
     });
   }
-  async getItem(key: any) {
-    return await Storage.get({ key });
-  }
-  async removeItem() {
-    await Storage.remove({ key: 'name' });
-  }
-  async keys() {
-    const { keys } = await Storage.keys();
-    console.log('Got keys: ', keys);
-  }
-  async clear() {
-    await Storage.clear();
-  }
-  async getTipsFromPromise(): Promise<any> {
-    await Storage.get({ key: 'tipsToday' })
-      .then(
-        (response: any) => {
-          console.log(response.value);
-          return this.tipsData.next(JSON.parse(response.value));
-        },
-        (error) => {
-          return throwError(error);
-        }
-      );
-  }
-  async getFromPromise(key): Promise<any> {
-    await Storage.get({ key })
-      .then(
-        (response) => {
-          return response.value;
-        },
-        (error) => {
-          return throwError(error);
-        }
-      );
-  }
-  getAsObservable(key): Observable<any> {
-    return from(this.getFromPromise(key));
+  getTokenAsObservable(): Observable<any> {
+    return from(this.getTokenFromPromise());
   }
 }

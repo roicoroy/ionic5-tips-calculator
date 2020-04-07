@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-
-import { TestObject } from 'protractor/built/driverProviders';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { StorageService } from 'src/app/services/storage.service';
-import { throwError } from 'rxjs';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +16,7 @@ export class LoginPage implements OnInit {
     public formBuilder: FormBuilder,
     private auth: AuthService,
     private router: Router,
-    private storage: StorageService
+    private storage: Storage
   ) {
     this.loginForm = formBuilder.group({
       identifier: ['roicoroy@yahoo.com.br'],
@@ -30,18 +27,19 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
       this.auth.loginStrapiUser(this.loginForm)
         .subscribe((response: any) => {
+          console.log(response);
           if (response.jwt) {
-            this.storage.setItem('token', response.jwt)
+            this.storage.set('token', response.jwt)
               .then(
-                () => this.storage.setItem('user', response.user),
+                () => this.storage.set('user', response.user),
               ).then(
-                () => this.router.navigateByUrl('calculator'),
+                () => this.router.navigateByUrl('calculator-slides'),
               ),
-              // tslint:disable-next-line: no-unused-expression
-              (error) => throwError(error);
+              (error) => console.log(error);
           }
         })
-    } else {
+    }
+    else {
       console.log('Error');
     }
   }
@@ -49,5 +47,11 @@ export class LoginPage implements OnInit {
   }
   register() {
     this.router.navigateByUrl('register');
+  }
+  add() {
+    this.storage.set('test', 'test string').then((response) => console.log('response....', response));
+  }
+  get(){
+    this.storage.get('test').then((response) => console.log('response....', response));
   }
 }
