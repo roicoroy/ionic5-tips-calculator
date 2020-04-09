@@ -10,16 +10,23 @@
 ion-slides {
   ion-slide {
     height: 95vh;
-    ion-row {
-      form {
-        width: 100%;
+    form {
+      overflow: scroll;
+    }
+  }
+  ion-slide.slide-date {
+    background-color: blue;
+  }
+  ion-slide.slide-waiters {
+    background-color: orange;
+    ion-row.form-row {
+      height: 95vh;
+      ion-row.form-row {
+        width: 100vw;
       }
     }
   }
-  // ion-slide.slide-date {
-  //   // background-color: blue;
-  // }
-  // ion-slide.slide-waiters {
-  //   // background-color: orange;
-  // }
+}
+.border {
+  border: 1px solid black;
 }

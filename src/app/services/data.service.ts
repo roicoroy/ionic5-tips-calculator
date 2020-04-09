@@ -8,6 +8,14 @@ import * as moment from 'moment';
 })
 export class DatasService {
     headers = new HttpHeaders().set('Content-Type', 'application/json');
+    headers_json = new HttpHeaders().set('Content-Type', 'application/json');
+    headers_form_data = new HttpHeaders().set('Content-Type', "multipart/form-data");
+    httpOptions = {
+        headers: new HttpHeaders({
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        })
+    };
     public tipsData: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
     public tipsTodayData: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
     constructor(
@@ -46,5 +54,25 @@ export class DatasService {
             date: dateForm,
         }
         return this.http.post(environment.api_url + environment.set_dates, JSON.stringify(date), { headers: this.headers });
+    }
+    getPoints() {
+        return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers });
+    }
+    postWaitersForm(waitersForm): Observable<any> {
+        console.log(waitersForm);
+        let waiters = waitersForm.points;
+        for (let waiter of waiters) { waiter = waiter };
+        // let points = waitersForm.points;
+        // for (let point of points) { point.id = point.id.id };
+        let formData = new FormData();
+        // formData.append('first_name', waitersForm.first_name);
+        // formData.append('last_name', waitersForm.last_name);
+        formData.append('waiters', JSON.stringify(waiters));
+        // let myWaiter = {
+        //     first_name: waitersForm.first_name,
+        //     last_name: waitersForm.last_name,
+        // }
+        // console.log(myWaiter);
+        return this.http.post(environment.api_url + environment.waiters, formData, this.httpOptions);
     }
 }

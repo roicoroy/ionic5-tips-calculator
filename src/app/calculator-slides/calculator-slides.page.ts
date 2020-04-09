@@ -11,16 +11,31 @@ import * as moment from 'moment';
   styleUrls: ['./calculator-slides.page.scss'],
 })
 export class CalculatorSlidesPage implements OnInit {
+  slideOpts = {
+    slidesPerView: 1,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "bullets",
+      dynamicBullets: true,
+      dynamicMainBullets: 3
+    }
+  };
+  pointsData;
   showSkip = true;
   calculatorForm: FormGroup;
   dateForm: FormGroup;
   puntuactionForm: FormGroup;
   waitersForm: FormGroup;
-  @ViewChild('slides', { static: true }) slides: IonSlides;
+  @ViewChild('slides', { static: false }) slides: IonSlides;
+  page = "0";
   customPickerOptions: any;
   date;
   appDateForm;
   fromDate: boolean = false;
+  waitersDataInit;
+  pointsDataInit;
+  hoursDataInit;
   constructor(
     public menu: MenuController,
     public router: Router,
@@ -29,6 +44,23 @@ export class CalculatorSlidesPage implements OnInit {
     public alertController: AlertController,
     private dataService: DatasService
   ) {
+    this.pointsDataInit = [
+      {
+        id: 1,
+        criteria: 'Speak good English',
+        points: 0.5
+      },
+      {
+        id: 2,
+        criteria: 'Serve Wine',
+        points: 0.5
+      },
+      {
+        id: 3,
+        criteria: 'Answer phone',
+        points: 0.5
+      }
+    ];
     this.calculatorForm = formBuilder.group({
       date: [''],
       time_from: [''],
@@ -60,9 +92,7 @@ export class CalculatorSlidesPage implements OnInit {
       ]
     }
   }
-  nextSlide(){
-    console.log('nextSlide');
-  }
+
   submitDate() {
     if (this.date) {
       this.dataService.postDate(this.date)
@@ -72,6 +102,7 @@ export class CalculatorSlidesPage implements OnInit {
               this.date = '';
               this.waitersForm.reset();
               this.fromDate = true;
+              this.selectedSlide(1);
             }
           },
           (error) => {
@@ -83,13 +114,18 @@ export class CalculatorSlidesPage implements OnInit {
   }
   submitWaiters() {
     if (this.waitersForm.valid) {
-      this.waitersForm.reset();
+      this.dataService.postWaitersForm(this.waitersForm.value.waiters)
+      .subscribe((response)=>{
+        console.log(response);
+        this.waitersForm.reset();
+      });
     }
   }
   initWaiters(): FormGroup {
     return this.formBuilder.group({
       first_name: [''],
       last_name: [''],
+      points: [''],
     });
   }
   addNewWaiters(): void {
@@ -130,6 +166,13 @@ export class CalculatorSlidesPage implements OnInit {
   get formPuntuactionData() {
     return this.calculatorForm.get('puntuaction') as FormArray;
   }
+  selectedSlide(index) {
+    this.slides.slideTo(index);
+  }
+  async moveButton() {
+    let index = await this.slides.getActiveIndex();
+    this.page = index.toString();
+  }
   async minError() {
     const alert = await this.alertController.create({
       header: 'You need at least one waiter..',
@@ -145,6 +188,7 @@ export class CalculatorSlidesPage implements OnInit {
     await alert.present();
   }
   ngOnInit() {
+    this.getPointsFromServer();
   }
   startApp() {
     this.router.navigateByUrl('calculator', { replaceUrl: true }).then(
@@ -166,7 +210,11 @@ export class CalculatorSlidesPage implements OnInit {
     this.menu.enable(false);
   }
   ionViewDidLeave() {
-    // enable the root left menu when leaving the tutorial page
     this.menu.enable(true);
+  }
+  getPointsFromServer() {
+    this.dataService.getPoints().subscribe((pointsData) => {
+      this.pointsData = pointsData;
+    })
   }
 }

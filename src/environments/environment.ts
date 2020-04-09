@@ -10,7 +10,9 @@ export const environment = {
   logout: '',
   tips: 'tips/',
   tips_todays: 'tips-todays/',
-  set_dates: 'set-dates'
+  set_dates: 'set-dates',
+  puntuactions: 'puntuactions',
+  waiters: 'waiters'
 };
 
 /*

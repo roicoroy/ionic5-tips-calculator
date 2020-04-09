@@ -22,3 +22,9 @@ export interface TipsToday {
     id: number,
     tipsAmount: string
 }
+
+export interface Puntuactions {
+    id: number,
+    criteria: string,
+    points: string
+}

@@ -1,11 +1,10 @@
 <ion-content color='dark'>
   <ion-grid>
-    <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
-      <ion-slide class='slide-date'>
+    <ion-slides #slides [pager]="true" [options]="slideOpts">
 
+      <!-- <ion-slide class='slide-date'>
         <ion-row>
           <form [formGroup]="dateForm" novalidate>
-
             <ion-col size="12" *ngIf='date'>
               <img src="assets/logo.svg" class="slide-image" />
               <ion-item>
@@ -16,17 +15,6 @@
                 Submit Date
               </ion-button>
             </ion-col>
-
-            <ion-col size="12" *ngIf='fromDate'>
-              <img src="assets/logo.svg" class="slide-image" />
-              <ion-text color="primary">
-                <h1>Move to the next slide</h1>
-              </ion-text>
-              <ion-button (click)="nextSlide()" expand="block" fill="outline" shape="round">
-                Next
-              </ion-button>
-            </ion-col>
-
             <ion-col size="12" *ngIf='!date && !fromDate'>
               <img src="assets/logo.svg" class="slide-image" />
               <ion-item>
@@ -36,77 +24,66 @@
                 </ion-datetime>
               </ion-item>
             </ion-col>
-
           </form>
         </ion-row>
-      </ion-slide>
+      </ion-slide> -->
 
       <ion-slide class='slide-waiters'>
-        <img src="assets/logo.svg" class="slide-image" />
-        <form [formGroup]="waitersForm" novalidate>
-          <ion-row>
-            <ion-col size="12" class='ingredients-col'>
-              <div formArrayName="waiters">
-                <section [formGroupName]="i" *ngFor="let item of formWaitersData.controls; let i = index">
-                  <ion-item-group>
-                    <ion-row class='ion-align-items-center'>
-                      <ion-col size='5'>
-                        <ion-item>
-                          <ion-label class='label-text-size-small input-text-color brand-oswald ion-text-uppercase'
-                            position='stacked'>First Name</ion-label>
-                          <ion-input class='input-text-color' type="text" maxlength="50" formControlName="first_name"
-                            placehoolder="Your first name">
-                          </ion-input>
-                        </ion-item>
-                      </ion-col>
-                      <ion-col size='5'>
-                        <ion-item>
-                          <ion-label class='label-text-size-small brand-oswald ion-text-uppercase' position='stacked'>
-                            Last Name
-                          </ion-label>
-                          <ion-input class='input-text-color' type="text" maxlength="50" formControlName="last_name"
-                            placehoolder="Your last name">
-                          </ion-input>
-                        </ion-item>
-                      </ion-col>
-                      <ion-col size='2'>
-                        <ion-button fill="clear" (click)="removeWaiters(i)">
-                          <ion-icon color='light' name="remove-circle"></ion-icon>
-                        </ion-button>
-                      </ion-col>
-                    </ion-row>
-                  </ion-item-group>
-                </section>
-              </div>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="ion-text-center">
-              <ion-button class='brand-oswald ion-text-uppercase' shape="round" fill="clear" color="light"
-                (click)="addNewWaiters()">
+        <form class="waiters-form" [formGroup]="waitersForm" novalidate>
+          <ion-row class='ion-text-center form-row' formArrayName="waiters">
+            <ion-col size='12' class="ion-text-center">
+              <ion-button (click)="addNewWaiters()" shape="round" expand="full" fill="solid" color="success"
+                size='small'>
                 <ion-icon slot="start" name="add-circle"></ion-icon>
-                <ion-text class='label-text-size' color='light'>
-                  <span>Add Waiter</span>
-                </ion-text>
+                Add waiter
+              </ion-button>
+            </ion-col>
+            <ion-col size="12" [formGroupName]="i" *ngFor="let item of formWaitersData.controls; let i = index"
+              class='waiter-form-colum'>
+              <ion-card>
+                <ion-card-header>
+                  <ion-toolbar>
+                    <ion-button class='remove-btn' shape="round" expand="full" fill="solid" color="danger" size='small'
+                      (click)="removeWaiters(i)">
+                      <ion-icon color='light' name="remove-circle"></ion-icon>
+                    </ion-button>
+                  </ion-toolbar>
+                  <ion-card-subtitle>Waiter's Card</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+
+                  <div>
+                    <ion-label color='dark' position='stacked'>Fitst Name</ion-label>
+                    <ion-input class='border' type="text" maxlength="50" formControlName="first_name"></ion-input>
+                  </div>
+
+                  <div>
+                    <ion-label color='dark' position='stacked'>Last Name</ion-label>
+                    <ion-input class='border' type="text" maxlength="50" formControlName="last_name"></ion-input>
+                  </div>
+
+                  <ionic-selectable class='border' formControlName="points" [isMultiple]="true" [items]="pointsData"
+                    itemTextField="criteria" [canSearch]="false">
+                  </ionic-selectable>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="12">
+              <ion-button (click)="submitWaiters()" expand="block" fill="outline" shape="round">
+                Submit Date
               </ion-button>
             </ion-col>
           </ion-row>
-          <div class='button-container ion-text-center'>
-            <ion-button shape="round" expand="block" fill="solid" color="primary" (click)='submitWaiters()'>
-              <ion-text class='brand-header-text'>
-                <span>Submit Waiters</span>
-              </ion-text>
-            </ion-button>
-          </div>
         </form>
       </ion-slide>
+
 
       <ion-slide class='slide-hours'>
         <ion-row>
           <ion-col size="12">
             <img src="assets/logo.svg" class="slide-image" />
             <h2 class="slide-title">Ready to Play?</h2>
-            <ion-button disabled='true' fill="clear" (click)="startApp()">
+            <ion-button fill="clear" (click)="startApp()">
               Continue
               <ion-icon slot="end" name="arrow-forward"></ion-icon>
             </ion-button>

@@ -51,7 +51,10 @@ export class LoginPage implements OnInit {
   add() {
     this.storage.set('test', 'test string').then((response) => console.log('response....', response));
   }
-  get(){
+  get() {
     this.storage.get('test').then((response) => console.log('response....', response));
+  }
+  skipAuth() {
+    this.router.navigateByUrl('calculator-slides');
   }
 }
