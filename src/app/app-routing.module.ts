@@ -2,22 +2,22 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./setup/setup.module').then(m => m.SetupPageModule)
+  // },
   {
     path: '',
-    loadChildren: () => import('./calculator-slides/calculator-slides.module').then(m => m.CalculatorSlidesPageModule)
-  },
-  {
-    path: 'calculator',
-    loadChildren: () => import('./calculator/calculator.module').then(m => m.CalculatorPageModule)
+    loadChildren: () => import('./pages/setup/setup.module').then( m => m.SetupPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./auth/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'calculator-slides',
-    loadChildren: () => import('./calculator-slides/calculator-slides.module').then(m => m.CalculatorSlidesPageModule)
-  }
+    path: 'setup',
+    loadChildren: () => import('./pages/setup/setup.module').then( m => m.SetupPageModule)
+  },
 ];
 @NgModule({
   imports: [

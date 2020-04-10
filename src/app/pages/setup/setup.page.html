@@ -1,0 +1,58 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-slides #slides (ionSlideWillChange)="moveButton()">
+
+      <ion-slide>
+        <ion-row class='first-slide-row'>
+          <ion-col size="12">
+            <ion-header>
+              <ion-toolbar color='secondary'>
+                <ion-text>Add Date</ion-text>
+              </ion-toolbar>
+            </ion-header>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button (click)="selectedTab(1)" expand="block" fill="solid" shape="round">
+              Next, Add Waiter
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row class='second-slide-row'>
+          <ion-col size='12' class='second-slide-headers'>
+            <ion-header>
+              <ion-toolbar color='secondary'>
+                <ion-text>Add Waiter</ion-text>
+              </ion-toolbar>
+            </ion-header>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button (click)="selectedTab(2)" expand="block" fill="clear" shape="round">
+              Next, Add Points to the waiter
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row class='third-slide-row'>
+          <ion-col size='12' class='third-slide-headers'>
+            <ion-header>
+              <ion-toolbar color='secondary'>
+                <ion-text>Add Points to Waiter</ion-text>
+              </ion-toolbar>
+            </ion-header>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button expand="block" fill="clear" shape="round">
+              Finish
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+    </ion-slides>
+  </ion-grid>
+</ion-content>
