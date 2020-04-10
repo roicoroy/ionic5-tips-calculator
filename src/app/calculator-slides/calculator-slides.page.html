@@ -31,7 +31,7 @@
       <ion-slide class='slide-waiters'>
         <form class="waiters-form" [formGroup]="waitersForm" novalidate>
           <ion-row class='ion-text-center form-row' formArrayName="waiters">
-            <ion-col size='12' class="ion-text-center">
+            <ion-col size='12' class="ion-text-center add-waiter">
               <ion-button (click)="addNewWaiters()" shape="round" expand="full" fill="solid" color="success"
                 size='small'>
                 <ion-icon slot="start" name="add-circle"></ion-icon>
@@ -39,7 +39,7 @@
               </ion-button>
             </ion-col>
             <ion-col size="12" [formGroupName]="i" *ngFor="let item of formWaitersData.controls; let i = index"
-              class='waiter-form-colum'>
+              class='card-col'>
               <ion-card>
                 <ion-card-header>
                   <ion-toolbar>
@@ -68,15 +68,16 @@
                 </ion-card-content>
               </ion-card>
             </ion-col>
-            <ion-col size="12">
+
+            <ion-col size="12" class='submit-button'>
               <ion-button (click)="submitWaiters()" expand="block" fill="outline" shape="round">
                 Submit Date
               </ion-button>
             </ion-col>
+            
           </ion-row>
         </form>
       </ion-slide>
-
 
       <ion-slide class='slide-hours'>
         <ion-row>

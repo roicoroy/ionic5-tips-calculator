@@ -21,8 +21,24 @@ ion-slides {
     background-color: orange;
     ion-row.form-row {
       height: 95vh;
-      ion-row.form-row {
-        width: 100vw;
+      ion-col.add-waiter {
+        background-color: green;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      ion-col.card-col {
+        background-color: yellow;
+        top: -12.6vh;
+      }
+      ion-col.submit-button {
+        background-color: yellow;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        bottom: -90px;
       }
     }
   }

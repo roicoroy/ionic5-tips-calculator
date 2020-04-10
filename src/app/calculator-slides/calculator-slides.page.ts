@@ -115,10 +115,10 @@ export class CalculatorSlidesPage implements OnInit {
   submitWaiters() {
     if (this.waitersForm.valid) {
       this.dataService.postWaitersForm(this.waitersForm.value.waiters)
-      .subscribe((response)=>{
-        console.log(response);
-        this.waitersForm.reset();
-      });
+      // .subscribe((response)=>{
+      //   console.log(response);
+      //   this.waitersForm.reset();
+      // });
     }
   }
   initWaiters(): FormGroup {

@@ -7,9 +7,9 @@ import * as moment from 'moment';
     providedIn: 'root'
 })
 export class DatasService {
-    headers = new HttpHeaders().set('Content-Type', 'application/json');
     headers_json = new HttpHeaders().set('Content-Type', 'application/json');
     headers_form_data = new HttpHeaders().set('Content-Type', "multipart/form-data");
+    headers_url_encoded = new HttpHeaders().set('Content-Type', "application/x-www-form-urlencoded");
     httpOptions = {
         headers: new HttpHeaders({
             'Accept': 'application/json',
@@ -23,14 +23,14 @@ export class DatasService {
     ) { }
 
     getTips(): Observable<any> {
-        this.http.get(environment.api_url + environment.tips, { headers: this.headers })
+        this.http.get(environment.api_url + environment.tips, { headers: this.headers_json })
             .subscribe((responseData: any) => {
                 this.tipsData.next(responseData);
             });
         return;
     }
     getTipToday(): Observable<any> {
-        return this.http.get(environment.api_url + environment.tips_todays, { headers: this.headers });
+        return this.http.get(environment.api_url + environment.tips_todays, { headers: this.headers_json });
     }
     postTipsToday(tipsTodayForm): Observable<any> {
         console.log(tipsTodayForm);
@@ -38,13 +38,13 @@ export class DatasService {
             tipsAmount: tipsTodayForm
         }
         console.log(myTipsTodayForm);
-        return this.http.post(environment.api_url + environment.tips_todays, JSON.stringify(myTipsTodayForm), { headers: this.headers });
+        return this.http.post(environment.api_url + environment.tips_todays, JSON.stringify(myTipsTodayForm), { headers: this.headers_json });
     }
     postTips(tipsForm) {
         let myTipsForm = {
 
         }
-        return this.http.post(environment.api_url + environment.tips, { headers: this.headers })
+        return this.http.post(environment.api_url + environment.tips, { headers: this.headers_json })
             .subscribe((responseData: any) => {
             });
     }
@@ -53,26 +53,56 @@ export class DatasService {
         let date = {
             date: dateForm,
         }
-        return this.http.post(environment.api_url + environment.set_dates, JSON.stringify(date), { headers: this.headers });
+        return this.http.post(environment.api_url + environment.set_dates, JSON.stringify(date), { headers: this.headers_json });
     }
     getPoints() {
-        return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers });
+        return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers_json });
     }
+    puntuactions = [];
+    waitersName: any = [];
     postWaitersForm(waitersForm): Observable<any> {
-        console.log(waitersForm);
-        let waiters = waitersForm.points;
-        for (let waiter of waiters) { waiter = waiter };
-        // let points = waitersForm.points;
-        // for (let point of points) { point.id = point.id.id };
-        let formData = new FormData();
-        // formData.append('first_name', waitersForm.first_name);
-        // formData.append('last_name', waitersForm.last_name);
-        formData.append('waiters', JSON.stringify(waiters));
-        // let myWaiter = {
-        //     first_name: waitersForm.first_name,
-        //     last_name: waitersForm.last_name,
-        // }
-        // console.log(myWaiter);
-        return this.http.post(environment.api_url + environment.waiters, formData, this.httpOptions);
+        // console.log(waitersForm);
+        this.puntuactions = [];
+        this.waitersName = [];
+        let waiters = waitersForm;
+        waiters.forEach(waiter => {
+            
+            // console.log(waiter.first_name, waiter.last_name);
+            
+            this.waitersName.push({
+                first_name: waiter.first_name,
+                last_name: waiter.last_name,
+            });
+            console.log(this.waitersName);
+
+            waiter.points.map(point => {
+                console.log(point);
+                this.puntuactions.push({
+                    id: point.id,
+                    criteria: point.criteria,
+                    points: point.points,
+                });
+            });
+
+
+            // let myPostData;
+            // myPostData = {
+            //     first_name: waiter.first_name,
+            //     last_name: waiter.last_name,
+            //     puntuactions: this.puntuactions,
+            // }
+            // console.log(myPostData);
+        });
+        // for (let waiter of waiters) {
+
+        // };
+        // console.log(this.puntuactions);
+        // let formData = new FormData();
+        // formData.append('first_name', points.first_name);
+        // formData.append('last_name', points.last_name);
+        // formData.append('puntuactions', JSON.stringify(puntuactions));
+
+        // return this.http.post(environment.api_url + environment.waiters, myPostData, { headers: this.headers_json });
+        return;
     }
 }
