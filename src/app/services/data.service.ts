@@ -55,54 +55,12 @@ export class DatasService {
         }
         return this.http.post(environment.api_url + environment.set_dates, JSON.stringify(date), { headers: this.headers_json });
     }
-    getPoints() {
+    getPointsFromServer(): Observable<any> {
         return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers_json });
     }
-    puntuactions = [];
-    waitersName: any = [];
-    postWaitersForm(waitersForm): Observable<any> {
-        // console.log(waitersForm);
-        this.puntuactions = [];
-        this.waitersName = [];
-        let waiters = waitersForm;
-        waiters.forEach(waiter => {
-            
-            // console.log(waiter.first_name, waiter.last_name);
-            
-            this.waitersName.push({
-                first_name: waiter.first_name,
-                last_name: waiter.last_name,
-            });
-            console.log(this.waitersName);
 
-            waiter.points.map(point => {
-                console.log(point);
-                this.puntuactions.push({
-                    id: point.id,
-                    criteria: point.criteria,
-                    points: point.points,
-                });
-            });
-
-
-            // let myPostData;
-            // myPostData = {
-            //     first_name: waiter.first_name,
-            //     last_name: waiter.last_name,
-            //     puntuactions: this.puntuactions,
-            // }
-            // console.log(myPostData);
-        });
-        // for (let waiter of waiters) {
-
-        // };
-        // console.log(this.puntuactions);
-        // let formData = new FormData();
-        // formData.append('first_name', points.first_name);
-        // formData.append('last_name', points.last_name);
-        // formData.append('puntuactions', JSON.stringify(puntuactions));
-
-        // return this.http.post(environment.api_url + environment.waiters, myPostData, { headers: this.headers_json });
-        return;
+    postWaitersForm(postData): Observable<any> {
+        console.log(postData);
+        return this.http.post(environment.api_url + environment.waiters, JSON.stringify(postData), { headers: this.headers_json });
     }
 }

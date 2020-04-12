@@ -1,110 +1,61 @@
-// ion-content {
-//     position: absolute;
-//     ion-grid {
-//       position: fixed;
-//       width: 100%;
-//       height: 100%;
-//       top: 54px;
-//     }
-//   }
-//   .dt-page-background {
-//     // background: url("src/assets/images/pattern-overlay.png") 0 0/100% 100% no-repeat;
-//     border-left: 3px solid var(--ion-color-primary);
-//     border-right: 3px solid var(--ion-color-primary);
-//     border-bottom: 3px solid var(--ion-color-primary);
-//     overflow: hidden;
-//     -webkit-overflow-scrolling: touch;
-//     margin: 0% 5% 0 5%;
-//     height: calc(100vh - 100px);
-//     border-radius: 20px;
-//   }
-//   ion-list {
-//     background: transparent !important;
-//     border-color: rgba(0, 0, 0, 0) !important;
-//   }
-//   h1 {
-//     font-size: 19px !important;
-//   }
-//   ion-row.segment-row {
-//     margin: -8px;
-//     margin-top: -5px;
-//     ion-segment {
-//       background-color: var(--ion-color-dark);
-//     }
-//     ion-segment-button {
-//       font-size: 14px;
-//       --background: var(--ion-color-primary);
-//       --background-checked: var(--ion-color-dark);
-//       border-top-right-radius: 20px;
-//       border-top-left-radius: 20px;
-//       border-top: 3px solid var(--ion-color-primary);
-//       border-right: 3px solid var(--ion-color-primary);
-//       border-left: 3px solid var(--ion-color-primary);
-//     }
-//     ion-segment-button.segment-button-checked {
-//       border-bottom: 3px solid var(--ion-color-dark);
-//     }
-//   }
-//   ion-list,
-//   ion-item {
-//     --background: transparent !important;
-//   }
-//   ion-slides {
-//     ion-slide {
-//       ion-col.first-slide-image-col {
-//         img {
-//           height: 150px;
-//         }
-//       }
-//       ion-col.first-slide-headers {
-//         top: -4vh;
-//       }
-//     }
-//     ion-row.second-slide-row {
-//       overflow-y: scroll;
-//       -webkit-overflow-scrolling: touch;
-//       ion-list {
-//         margin-bottom: -20px;
-//       }
-//       ion-list-header {
-//         margin-bottom: -10px;
-//       }
-//       ion-item {
-//         margin-top: -10px;
-//         &.ingredients-item {
-//           margin-left: -5px;
-//         }
-//       }
-//     }
-//     ion-col.second-slide-image-col {
-//       img {
-//         height: 187px;
-//       }
-//     }
-//     ion-col.text-placeholder-col {
-//       padding-top: 90px;
-//       height: 187px;
-//     }
-//     ion-button.submit-serve {
-//       margin-top: 40px;
-//       margin-bottom: 30px;
-//     }
-//   }
-//   .details-section {
-//     overflow-y: scroll;
-//     -webkit-overflow-scrolling: touch;
-//     height: calc(100vh - 480px);
-//     margin-bottom: 30px;
-//     text-align: left;
-//     top: -35px;
-//   }
-//   .ingredients-col {
-//     overflow-y: scroll;
-//     -webkit-overflow-scrolling: touch;
-//     height: calc(100vh - 445px);
-//     margin-bottom: 30px;
-//   }
-//   .segment-button-indicator {
-//     display: none;
-//   }
-  
+.border {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+ion-slides {
+    ion-slide {
+        height: 95vh;
+        background-color: orange;
+        ion-row {
+            display: flex;
+        }
+    }
+    ion-row.first-slide-row {
+        ion-col.first-slide-headers {
+            background-color: blue;
+            height: 5vh;
+        }
+        ion-col.first-slide-body {
+            background-color: green;
+            height: 80vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.first-slide-footer {
+            background-color: yellow;
+            height: 10vh;
+        }
+    }
+    ion-row.second-slide-row {
+        ion-col.second-slide-headers {
+            background-color: blue;
+            height: 10vh;
+        }
+        ion-col.second-slide-body {
+            background-color: green;
+            height: 70vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.second-slide-footer {
+            background-color: yellow;
+            height: 15vh;
+        }
+    }
+    ion-row.third-slide-row {
+        ion-col.third-slide-headers {
+            background-color: blue;
+            height: 10vh;
+        }
+        ion-col.third-slide-body {
+            background-color: green;
+            height: 70vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.third-slide-footer {
+            background-color: yellow;
+            height: 15vh;
+        }
+    }
+}
