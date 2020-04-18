@@ -1,0 +1,97 @@
+<ion-content>
+  <ion-grid fixed>
+    <ion-slides #slides [pager]="true" [options]="slideOpts" (ionSlideWillChange)="moveButton()"
+      class='swiper-no-swiping'>
+
+      <ion-slide>
+        <ion-row class='first-slide-row'>
+          <ion-col size="12" class='first-slide-headers'>
+            <ion-text>Add Waiter</ion-text>
+          </ion-col>
+          <ion-col size='12' class="ion-text-center add-waiter">
+            <ion-button (click)="addNewWaiterField()" shape="round" expand="full" fill="solid" color="success" size='small'>
+              <ion-icon slot="start" name="add-circle"></ion-icon>
+              Add waiter to the array
+            </ion-button>
+          </ion-col>
+          <ion-col size="12" class='first-slide-body'>
+            <form class="waiters-form" [formGroup]="waitersForm" novalidate>
+
+              <div formArrayName="waiterList">
+                <div [formGroupName]="i" *ngFor="let item of formData.controls; let i = index"
+                  class='waiter-form-colum'>
+
+                  <ion-card>
+                    <ion-card-header>
+                      <ion-toolbar>
+                        <ion-button class='remove-btn' shape="round" expand="full" fill="solid" color="danger"
+                          size='small' (click)="removeWaiterField(i)">
+                          <ion-icon color='light' name="remove-circle"></ion-icon>
+                        </ion-button>
+                      </ion-toolbar>
+                      <ion-card-subtitle>Waiter's Card</ion-card-subtitle>
+                      <ion-card-title>
+                        <ion-label color='dark' position='stacked'>First Name</ion-label>
+                        <ion-input class='border' type="text" maxlength="50" formControlName="first_name"></ion-input>
+                      </ion-card-title>
+                      <ion-card-title>
+                        <ion-label color='dark' position='stacked'>Last Name</ion-label>
+                        <ion-input class='border' type="text" maxlength="50" formControlName="last_name"></ion-input>
+                      </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <ion-row>
+                        <ion-col size='12' class='col-points border'>
+                          <ionic-selectable formControlName="points" [isMultiple]="true" [items]="pointsDataInit"
+                            itemTextField="criteria" [canSearch]="false">
+                          </ionic-selectable>
+                        </ion-col>
+                      </ion-row>
+                    </ion-card-content>
+                  </ion-card>
+
+
+                </div>
+              </div>
+              <ion-button (click)="submitWaiters()" expand="block" fill="solid" shape="round">
+                Submit Waiter
+              </ion-button>
+            </form>
+          </ion-col>
+
+          <ion-col size="12" class='first-slide-footer'>
+            <ion-button (click)="selectedTab(1)" expand="block" fill="solid" shape="round">
+              Next, Add Points to the waiter
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+      <ion-slide>
+        <ion-row class='third-slide-row'>
+          <ion-col size='12' class='third-slide-headers'>
+            <ion-header>
+              <ion-toolbar color='secondary'>
+                <ion-text>Add Date</ion-text>
+              </ion-toolbar>
+            </ion-header>
+          </ion-col>
+
+          <ion-col size='12' class='third-slide-body'>
+            body
+          </ion-col>
+
+          <ion-col size="12" class='third-slide-footer'>
+            <ion-button expand="block" fill="solid" shape="round">
+              Finish
+            </ion-button>
+            <ion-button (click)="selectedTab(0)" expand="block" fill="solid" shape="round">
+              Back
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
+
+    </ion-slides>
+  </ion-grid>
+</ion-content>

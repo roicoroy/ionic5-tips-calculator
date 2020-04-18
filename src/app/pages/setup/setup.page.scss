@@ -1,0 +1,61 @@
+.border {
+    border: 1px solid black;
+    border-radius: 20px;
+}
+ion-slides {
+    ion-slide {
+        height: 95vh;
+        background-color: orange;
+        ion-row {
+            display: flex;
+        }
+    }
+    ion-row.first-slide-row {
+        ion-col.first-slide-headers {
+            background-color: blue;
+            height: 5vh;
+        }
+        ion-col.first-slide-body {
+            background-color: green;
+            height: 80vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.first-slide-footer {
+            background-color: yellow;
+            height: 10vh;
+        }
+    }
+    ion-row.second-slide-row {
+        ion-col.second-slide-headers {
+            background-color: blue;
+            height: 10vh;
+        }
+        ion-col.second-slide-body {
+            background-color: green;
+            height: 70vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.second-slide-footer {
+            background-color: yellow;
+            height: 15vh;
+        }
+    }
+    ion-row.third-slide-row {
+        ion-col.third-slide-headers {
+            background-color: blue;
+            height: 10vh;
+        }
+        ion-col.third-slide-body {
+            background-color: green;
+            height: 70vh;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+        ion-col.third-slide-footer {
+            background-color: yellow;
+            height: 15vh;
+        }
+    }
+}

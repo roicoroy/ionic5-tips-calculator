@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content color='dark'>
   <ion-grid>
     <ion-row>
       <ion-col size="12">
@@ -19,22 +19,18 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <div class='button-container'>
-            <ion-button color="primary" class='enter-btn' (click)='onSubmit()'>
-              <ion-text color="dark">
-                <span class='ion-text-uppercase'>Enter</span>
-              </ion-text>
-            </ion-button>
-          </div>
+          <ion-button color="primary" shape="round" expand="full" fill="outline" (click)='onSubmit()'>
+            <ion-text color=" dark">
+              <span class='ion-text-uppercase'>Enter</span>
+            </ion-text>
+          </ion-button>
         </ion-col>
         <ion-col>
-          <div class='button-container'>
-            <ion-button color="primary" class='enter-btn' (click)='register()'>
-              <ion-text color="dark">
-                <span class='ion-text-uppercase'>Register</span>
-              </ion-text>
-            </ion-button>
-          </div>
+          <ion-button color="primary" shape="round" expand="full" fill="outline" (click)='skipAuth()'>
+            <ion-text color=" dark">
+              <span class='ion-text-uppercase'>Skip Auth</span>
+            </ion-text>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,0 +1,20 @@
+<ion-tabs appSwipetab (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="date-setup">
+      <ion-icon name="flash"></ion-icon>
+      <ion-label>Date</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="waiters-setup">
+      <ion-icon name="apps"></ion-icon>
+      <ion-label>Waiters</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="points-setup">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>Points</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs>

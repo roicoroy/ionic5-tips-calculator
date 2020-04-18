@@ -1,6 +1,6 @@
 {
   "appId": "uk.tips.calculator",
-  "appName": "tips-calculator",
+  "appName": "Tips Calculator",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

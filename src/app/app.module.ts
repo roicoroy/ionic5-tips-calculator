@@ -9,6 +9,8 @@ import { WheelSelector } from '@ionic-native/wheel-selector/ngx';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/interceptor';
+import { IonicStorageModule } from '@ionic/storage';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -20,6 +22,8 @@ import { TokenInterceptor } from './services/interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    IonicStorageModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     WheelSelector,
