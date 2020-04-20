@@ -2,60 +2,92 @@
     border: 1px solid black;
     border-radius: 20px;
 }
+
 ion-slides {
     ion-slide {
-        height: 95vh;
-        background-color: orange;
         ion-row {
+            display: -webkit-box;
             display: flex;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            height: 83vh;
+        }
+        ion-row.first-slide-row {
+            ion-col.first-slide-headers {
+                display: -webkit-box;
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                height: 50px;
+            }
+            ion-col.first-slide-body {
+                display: -webkit-box;
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                justify-content: center;
+                position: absolute;
+                top: 50px;
+                min-height: 100%;
+                overflow-y: scroll;
+                -webkit-overflow-scrolling: touch;
+                ion-item-group {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    left: 0;
+                    ion-item {
+                        --background: transparent;
+                        ion-input {
+                            --background: var(--ion-color-light);
+                        }
+                    }
+                }
+            }
+        }
+        ion-row.second-slide-row {
+            ion-col.second-slide-headers {
+                background-color: blue;
+                position: absolute;
+                top: 0;
+                // height: 10vh;
+            }
+            ion-col.second-slide-body {
+                background-color: green;
+                // height: 65vh;
+                // overflow-y: scroll;
+                // -webkit-overflow-scrolling: touch;
+            }
+        }
+        ion-row.third-slide-row {
+            ion-col.third-slide-headers {
+                background-color: blue;
+                // height: 10vh;
+            }
+            ion-col.third-slide-body {
+                background-color: green;
+                // height: 65vh;
+                // overflow-y: scroll;
+                // -webkit-overflow-scrolling: touch;
+            }
         }
     }
-    ion-row.first-slide-row {
-        ion-col.first-slide-headers {
-            background-color: blue;
-            height: 5vh;
-        }
-        ion-col.first-slide-body {
-            background-color: green;
-            height: 80vh;
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-        }
-        ion-col.first-slide-footer {
-            background-color: yellow;
-            height: 10vh;
-        }
+
+    ion-col.slide-footer {
+        background-color: yellow;
+        // height: 25vh;
     }
-    ion-row.second-slide-row {
-        ion-col.second-slide-headers {
-            background-color: blue;
-            height: 10vh;
-        }
-        ion-col.second-slide-body {
-            background-color: green;
-            height: 70vh;
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-        }
-        ion-col.second-slide-footer {
-            background-color: yellow;
-            height: 15vh;
-        }
-    }
-    ion-row.third-slide-row {
-        ion-col.third-slide-headers {
-            background-color: blue;
-            height: 10vh;
-        }
-        ion-col.third-slide-body {
-            background-color: green;
-            height: 70vh;
-            overflow-y: scroll;
-            -webkit-overflow-scrolling: touch;
-        }
-        ion-col.third-slide-footer {
-            background-color: yellow;
-            height: 15vh;
-        }
-    }
+}
+div.submit-button-div {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 10vh;
 }

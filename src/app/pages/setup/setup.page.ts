@@ -16,9 +16,9 @@ export class SetupPage implements OnInit {
   page = "0";
   slideOpts = {
     slidesPerView: 1,
-    loop: false,
-    noSwiping: true,
-    noSwipingClass: 'swiper-no-swiping',
+    // loop: false,
+    // noSwiping: true,
+    // noSwipingClass: 'swiper-no-swiping',
     pagination: {
       el: ".swiper-pagination",
       type: "bullets",
@@ -27,6 +27,7 @@ export class SetupPage implements OnInit {
     }
   };
   waitersForm: FormGroup;
+  waitersNameForm: FormGroup;
   pointsDataInit;
   puntuactions = [];
   waitersName: any = [];
@@ -41,7 +42,7 @@ export class SetupPage implements OnInit {
     private dataService: DatasService
   ) {
     this.waitersForm = formBuilder.group({
-      waiterList: this.formBuilder.array([
+      waiters: this.formBuilder.array([
         this.initWaiters(),
       ]),
     });
@@ -57,59 +58,58 @@ export class SetupPage implements OnInit {
       points: [''],
     });
   }
-  addNewWaiterField(): void {
-    const control = this.waitersForm.controls.waiterList as FormArray;
+  addNewWaitersField(): void {
+    const control = this.waitersForm.controls.waiters as FormArray;
     control.push(this.initWaiters());
   }
-  removeWaiterField(i: number): void {
-    const control = this.waitersForm.controls.waiterList as FormArray;
+  removeWaitersField(i: number): void {
+    const control = this.waitersForm.controls.waiters as FormArray;
     if (control.length > 1) {
       control.removeAt(i);
     }
     else {
-      this.errorHandler('You need at least one waiter..');
+      this.handleErrorAlert('You need at least one waiter..');
     }
   }
   get formData() {
-    return this.waitersForm.get('waiterList') as FormArray;
+    return this.waitersForm.get('waiters') as FormArray;
   }
   submitWaiters() {
     if (this.waitersForm.valid) {
-      this.puntuactions = [];
-      this.waitersName = [];
-      let waiters = this.waitersForm.value.waiterList;
-      waiters.map((waiter) => {
-        let pointsTotal = waiter.points.reduce(function (prev, cur) {
-          return prev + cur.points;
-        }, 0);
-        // this.waitersName.push({
-        //   id: index,
-        //   first_name: waiter.first_name,
-        //   last_name: waiter.last_name,
-        //   points: pointsTotal,
-        // });
-        // let formData = new FormData();
-        // formData.append('first_name', this.waitersName.first_name);
-        // formData.append('last_name', this.waitersName.last_name);
-        // formData.append('points', this.waitersName.points);
+      console.log(this.waitersForm.value.waiters);
+      // this.puntuactions = [];
+      // this.waitersName = [];
+      // let waiters = this.waitersForm.value.waiterList;
+      // waiters.map((waiter) => {
+      //   let pointsTotal = waiter.points.reduce(function (prev, cur) {
+      //     return prev + cur.points;
+      //   }, 0);
+      //   // this.waitersName.push({
+      //   //   id: index,
+      //   //   first_name: waiter.first_name,
+      //   //   last_name: waiter.last_name,
+      //   //   points: pointsTotal,
+      //   // });
+      //   // let formData = new FormData();
+      //   // formData.append('first_name', this.waitersName.first_name);
+      //   // formData.append('last_name', this.waitersName.last_name);
+      //   // formData.append('points', this.waitersName.points);
 
-        let myPostData: any;
-        this.waitersName.forEach(element => {
-          myPostData = {
-            first_name: element.first_name,
-            last_name: element.last_name,
-            points: pointsTotal,
-          }
-          console.log(myPostData);
-        });
-
-        // this.dataService.postWaitersForm(myPostData)
-        //   .subscribe((response) => {
-        //     console.log(response);
-        //     this.waitersForm.reset();
-        //   });
-
-      });
+      //   let myPostData: any;
+      //   this.waitersName.forEach(element => {
+      //     myPostData = {
+      //       first_name: element.first_name,
+      //       last_name: element.last_name,
+      //       points: pointsTotal,
+      //     }
+      //     console.log(myPostData);
+      //     this.dataService.postWaitersForm(myPostData)
+      //       .subscribe((response) => {
+      //         console.log(response);
+      //         this.waitersForm.reset();
+      //       });
+      //   });
+      // });
     }
   }
   async minWaiterError(message) {
@@ -126,9 +126,9 @@ export class SetupPage implements OnInit {
     });
     await alert.present();
   }
-  errorHandler(error) {
-    this.handleErrorAlert(error).then((error) => this.handleErrorAlert(error));
-  }
+  // errorHandler(error) {
+  //   this.handleErrorAlert(error).then((error) => this.handleErrorAlert(error));
+  // }
   ngOnInit() {
   }
   ionViewWillEnter() {

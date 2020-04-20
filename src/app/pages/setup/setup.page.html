@@ -1,7 +1,55 @@
-<ion-content>
-  <ion-grid fixed>
+<ion-content color='dark'>
+  <ion-grid>
     <ion-slides #slides [pager]="true" [options]="slideOpts" (ionSlideWillChange)="moveButton()"
       class='swiper-no-swiping'>
+
+      <ion-slide>
+        <ion-row class='first-slide-row'>
+          <ion-col size='12' class="ion-text-center first-slide-headers">
+            <ion-button (click)="addNewWaitersField()" shape="round" expand="full" fill="solid" color="primary"
+              size='small'>
+              <ion-icon slot="start" name="add-circle"></ion-icon>
+              Add waiter's name to the array
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="12" class='first-slide-body'>
+            <form class="waiters-name-form" [formGroup]="waitersForm" novalidate>
+
+              <ion-item-group formArrayName="waiters">
+                <ion-item-sliding [formGroupName]="i" *ngFor="let item of formData.controls; let i = index"
+                  class='waiter-form-colum'>
+                  <ion-item>
+                    <div>
+                      <ion-input class='border' type="text" maxlength="50" formControlName="first_name"></ion-input>
+                    </div>
+                    <div>
+                      <ion-input class='border' type="text" maxlength="50" formControlName="last_name"></ion-input>
+                    </div>
+                    <ion-note slot="end">
+                      <ion-button expand="block" fill="clear" shape="round">
+                        <ionic-selectable formControlName="points" [isMultiple]="true" [items]="pointsDataInit"
+                          itemTextField="criteria" [canSearch]="false">
+                        </ionic-selectable>
+                      </ion-button>
+                    </ion-note>
+                  </ion-item>
+                  <ion-item-options side="end">
+                    <ion-item-option color="danger" (click)="removeWaitersField(i)">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-item-option>
+                  </ion-item-options>
+                </ion-item-sliding>
+              </ion-item-group>
+              <div class='submit-button-div'>
+                <ion-button (click)='submitWaiters()' expand="block" fill="solid" shape="round" color='danger'>
+                  Post Form!
+                </ion-button>
+              </div>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-slide>
 
       <ion-slide>
         <ion-row class='first-slide-row'>
@@ -9,18 +57,17 @@
             <ion-text>Add Waiter</ion-text>
           </ion-col>
           <ion-col size='12' class="ion-text-center add-waiter">
-            <ion-button (click)="addNewWaiterField()" shape="round" expand="full" fill="solid" color="success" size='small'>
+            <ion-button (click)="addNewWaiterField()" shape="round" expand="full" fill="solid" color="success"
+              size='small'>
               <ion-icon slot="start" name="add-circle"></ion-icon>
               Add waiter to the array
             </ion-button>
           </ion-col>
           <ion-col size="12" class='first-slide-body'>
             <form class="waiters-form" [formGroup]="waitersForm" novalidate>
-
               <div formArrayName="waiterList">
                 <div [formGroupName]="i" *ngFor="let item of formData.controls; let i = index"
                   class='waiter-form-colum'>
-
                   <ion-card>
                     <ion-card-header>
                       <ion-toolbar>
@@ -46,23 +93,20 @@
                             itemTextField="criteria" [canSearch]="false">
                           </ionic-selectable>
                         </ion-col>
+                        <ion-col size="12">
+                          <ion-button (click)='submitWaiters()' expand="block" fill="solid" shape="round">
+                            Post Form!
+                          </ion-button>
+                        </ion-col>
                       </ion-row>
                     </ion-card-content>
                   </ion-card>
-
-
                 </div>
               </div>
-              <ion-button (click)="submitWaiters()" expand="block" fill="solid" shape="round">
-                Submit Waiter
-              </ion-button>
             </form>
           </ion-col>
-
-          <ion-col size="12" class='first-slide-footer'>
-            <ion-button (click)="selectedTab(1)" expand="block" fill="solid" shape="round">
-              Next, Add Points to the waiter
-            </ion-button>
+          <ion-col size="12" class='slide-footer'>
+            <app-footer></app-footer>
           </ion-col>
         </ion-row>
       </ion-slide>
@@ -95,3 +139,19 @@
     </ion-slides>
   </ion-grid>
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-toolbar color='secondary'>
+      <ion-row class='third-slide-row'>
+        <ion-col size="12" class='third-slide-footer'>
+          <ion-button expand="block" fill="solid" shape="round">
+            Next
+          </ion-button>
+          <ion-button expand="block" fill="solid" shape="round">
+            Back
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-grid>
+</ion-footer>

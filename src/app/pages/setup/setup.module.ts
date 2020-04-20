@@ -8,6 +8,7 @@ import { SetupPageRoutingModule } from './setup-routing.module';
 
 import { SetupPage } from './setup.page';
 import { CustomComponentsModule } from '../../components/custom-components.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,12 @@ import { CustomComponentsModule } from '../../components/custom-components.modul
     ReactiveFormsModule,
     CustomComponentsModule
   ],
-  declarations: [SetupPage]
+  declarations: [
+    SetupPage,
+    FooterComponent
+  ],
+  entryComponents:[
+
+  ]
 })
 export class SetupPageModule {}

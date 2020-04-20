@@ -58,9 +58,20 @@ export class DatasService {
     getPointsFromServer(): Observable<any> {
         return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers_json });
     }
-
     postWaitersForm(postData): Observable<any> {
         console.log(postData);
         return this.http.post(environment.api_url + environment.waiters, JSON.stringify(postData), { headers: this.headers_json });
+    }
+    postWaitersNameForm(postData) {
+        let myData: any;
+        postData.forEach(element => {
+            console.log(element);
+             myData = {
+                first_name: element.first_name,
+                last_name: element.last_name,
+            }
+            console.log(myData);
+        });
+        this.http.post(environment.api_url + environment.waiters, JSON.stringify(myData), { headers: this.headers_json });
     }
 }
