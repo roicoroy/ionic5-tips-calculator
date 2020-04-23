@@ -1,93 +1,53 @@
 .border {
-    border: 1px solid black;
-    border-radius: 20px;
+  border: 1px solid black;
+  border-radius: 20px;
 }
 
 ion-slides {
-    ion-slide {
-        ion-row {
-            display: -webkit-box;
-            display: flex;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            height: 83vh;
-        }
-        ion-row.first-slide-row {
-            ion-col.first-slide-headers {
-                display: -webkit-box;
-                display: flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-                position: absolute;
-                top: 0;
-                height: 50px;
-            }
-            ion-col.first-slide-body {
-                display: -webkit-box;
-                display: flex;
-                -webkit-box-align: center;
-                align-items: center;
-                -webkit-box-pack: center;
-                justify-content: center;
-                position: absolute;
-                top: 50px;
-                min-height: 100%;
-                overflow-y: scroll;
-                -webkit-overflow-scrolling: touch;
-                ion-item-group {
-                    position: absolute;
-                    top: 0;
-                    width: 100%;
-                    left: 0;
-                    ion-item {
-                        --background: transparent;
-                        ion-input {
-                            --background: var(--ion-color-light);
-                        }
-                    }
-                }
-            }
-        }
-        ion-row.second-slide-row {
-            ion-col.second-slide-headers {
-                background-color: blue;
-                position: absolute;
-                top: 0;
-                // height: 10vh;
-            }
-            ion-col.second-slide-body {
-                background-color: green;
-                // height: 65vh;
-                // overflow-y: scroll;
-                // -webkit-overflow-scrolling: touch;
-            }
-        }
-        ion-row.third-slide-row {
-            ion-col.third-slide-headers {
-                background-color: blue;
-                // height: 10vh;
-            }
-            ion-col.third-slide-body {
-                background-color: green;
-                // height: 65vh;
-                // overflow-y: scroll;
-                // -webkit-overflow-scrolling: touch;
-            }
-        }
-    }
+  //   background-color: red;
 
-    ion-col.slide-footer {
-        background-color: yellow;
-        // height: 25vh;
+  ion-slide {
+    border: 1px solid black;
+    border-radius: 20px;
+    ion-row {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      height: 99vh;
+      width: 100%;
     }
-}
-div.submit-button-div {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 10vh;
+    ion-row.slide-row {
+      ion-col.slide-headers {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        // position: absolute;
+        // top: 0;
+        // height: 50px;
+      }
+      ion-col.slide-body {
+        // display: -webkit-box;
+        // display: flex;
+        // -webkit-box-align: center;
+        // align-items: center;
+        // -webkit-box-pack: center;
+        // justify-content: center;
+        // background: blue;
+        height: 71%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+      ion-col.slide-footer {
+        // background-color: yellow;
+        // bottom: -40vh;
+        // height: 25vh;
+      }
+    }
+  }
 }

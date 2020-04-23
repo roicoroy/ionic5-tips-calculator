@@ -19,12 +19,12 @@ export class SetupPage implements OnInit {
     // loop: false,
     // noSwiping: true,
     // noSwipingClass: 'swiper-no-swiping',
-    pagination: {
-      el: ".swiper-pagination",
-      type: "bullets",
-      dynamicBullets: true,
-      dynamicMainBullets: 3
-    }
+    // pagination: {
+    //   el: ".swiper-pagination",
+    //   type: "bullets",
+    //   dynamicBullets: true,
+    //   dynamicMainBullets: 3
+    // }
   };
   waitersForm: FormGroup;
   waitersNameForm: FormGroup;
