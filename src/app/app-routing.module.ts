@@ -8,7 +8,7 @@ const routes: Routes = [
   // },
   {
     path: '',
-    loadChildren: () => import('./pages/setup/setup.module').then( m => m.SetupPageModule)
+    loadChildren: () => import('./intro/date/date.module').then( m => m.DatePageModule)
   },
   {
     path: 'login',
@@ -18,6 +18,19 @@ const routes: Routes = [
     path: 'setup',
     loadChildren: () => import('./pages/setup/setup.module').then( m => m.SetupPageModule)
   },
+  {
+    path: 'date',
+    loadChildren: () => import('./intro/date/date.module').then( m => m.DatePageModule)
+  },
+  {
+    path: 'waiters',
+    loadChildren: () => import('./intro/waiters/waiters.module').then( m => m.WaitersPageModule)
+  },
+  {
+    path: 'points',
+    loadChildren: () => import('./intro/points/points.module').then( m => m.PointsPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

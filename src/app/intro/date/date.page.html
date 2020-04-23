@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color='secondary'>
+    <ion-text>Add Date</ion-text>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row class='slide-row'>
+    <ion-col size='12' class='slide-body'>
+      <ion-img src="assets/shapes.svg"></ion-img>
+      <form [formGroup]="dateForm" novalidate>
+        <ion-col size='12' class='form-field'>
+          <ion-item class='border'>
+            <ion-label position="stacked">Tap to insert the date of today's shift</ion-label>
+            <ion-datetime formControlName="date" displayFormat="YYYY/MM/DD"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </form>
+    </ion-col>
+    <ion-col size="12" class='slide-footer'>
+      <ion-button expand="block" fill="solid" shape="round" (click)='clearDateForm()'>
+        Clear Form
+      </ion-button>
+      <ion-button expand="block" fill="solid" shape="round" (click)='submitDate()'>
+        Submit Date
+      </ion-button>
+      <ion-button expand="block" fill="solid" shape="round" (click)='goAddWaiters()'>
+        Go Add Waiters
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -26,11 +26,20 @@ export class SetupPage implements OnInit {
     //   dynamicMainBullets: 3
     // }
   };
+
+  // date
+  dateForm: FormGroup;
+
+  // date
+
+
   waitersForm: FormGroup;
   waitersNameForm: FormGroup;
   pointsDataInit;
   puntuactions = [];
   waitersName: any = [];
+  waitersArray: any = [];
+
   constructor(
     private storage: Storage,
     private router: Router,
@@ -41,6 +50,9 @@ export class SetupPage implements OnInit {
     private auth: AuthService,
     private dataService: DatasService
   ) {
+    this.dateForm = formBuilder.group({
+      date: ['2020-04-23']
+    });
     this.waitersForm = formBuilder.group({
       waiters: this.formBuilder.array([
         this.initWaiters(),
@@ -143,4 +155,12 @@ export class SetupPage implements OnInit {
   // serveUpload() {
   //   this.router.navigateByUrl('serve-upload');
   // }
+  clearDateForm(): void {
+    this.dateForm.reset();
+  }
+  submitDate() {
+    this.dataService.postDate(this.dateForm).subscribe((serverResponse) => {
+      
+    });
+  }
 }
