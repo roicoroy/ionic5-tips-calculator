@@ -8,5 +8,69 @@
 </ion-header>
 
 <ion-content>
+  <form class="waiters-form" [formGroup]="waitersForm" novalidate>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <h3>Waiter's Card</h3>
+        </ion-col>
+      </ion-row>
+      <ion-row class='ion-text-center form-row' formArrayName="waiterList">
+
+        <ion-col size="12" [formGroupName]="i" *ngFor="let item of formData.controls; let i = index"
+          class='waiter-form-colum'>
+
+          <ion-item>
+            <ion-button class='remove-btn' shape="round" expand="full" fill="solid" color="danger" size='small'
+              (click)="removeWaiterField(i)">
+              <ion-icon color='light' name="remove-circle"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <ion-item>
+            <ion-label color='dark' position='stacked'>Name</ion-label>
+            <ion-input class='border' type="text" maxlength="50" formControlName="name"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-select formControlName="points" interface="alert" multiple="true" placeholder="Select One">
+              <ion-select-option *ngFor="let p of pointsDataInit" [value]="p.points">{{ p.criteria }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class='footer ion-text-center'>
+        <ion-button (click)="addNewWaiterField()" shape="round" expand="full" fill="solid" color="success" size='small'>
+          <ion-icon slot="start" name="add-circle"></ion-icon>
+          Add waiter
+        </ion-button>
+        <ion-button expand="block" fill="solid" shape="round" (click)='clearForm()'>
+          Clear Form
+        </ion-button>
+        <ion-button expand="block" fill="solid" shape="round" (click)='submitWaiters()'>
+          Submit Date
+        </ion-button>
+        <ion-button expand="block" fill="solid" shape="round" (click)='goAddHoursWaiters()'>
+          Go Add Hours to the Waiters
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+
+
+
 
 </ion-content>
