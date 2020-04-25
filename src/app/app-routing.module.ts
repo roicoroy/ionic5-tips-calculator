@@ -26,10 +26,12 @@ const routes: Routes = [
     path: 'waiters',
     loadChildren: () => import('./intro/waiters/waiters.module').then( m => m.WaitersPageModule)
   },
+
   {
-    path: 'points',
-    loadChildren: () => import('./intro/points/points.module').then( m => m.PointsPageModule)
+    path: 'hours',
+    loadChildren: () => import('./intro/hours/hours.module').then( m => m.HoursPageModule)
   },
+
 
 ];
 @NgModule({

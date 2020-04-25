@@ -7,6 +7,7 @@ import { PickerController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Waiter } from './interfaces';
+import { DatasService } from 'src/app/services/data.service';
 @Component({
   selector: 'app-waiters',
   templateUrl: './waiters.page.html',
@@ -32,7 +33,7 @@ export class WaitersPage implements OnInit {
     subHeader: 'Select your favorite color'
   };
 
-  
+
   waitersForm: FormGroup;
   pointsDataInit: any;
   waitersArray = [];
@@ -42,6 +43,7 @@ export class WaitersPage implements OnInit {
     private pickerController: PickerController,
     public modalController: ModalController,
     private formBuilder: FormBuilder,
+    private dataService: DatasService
   ) {
     this.waitersForm = formBuilder.group({
       waiterList: this.formBuilder.array([this.initWaiters()]),
@@ -97,16 +99,19 @@ export class WaitersPage implements OnInit {
             const concatArray = [...waitersList.points];
             console.log(concatArray);
             // tslint:disable-next-line: only-arrow-functions
-            const pointsTotal = concatArray.reduce(function(prev, cur) {
+            const pointsTotal = concatArray.reduce(function (prev, cur) {
               return prev + cur;
             }, 0);
             console.log(pointsTotal);
-            const myWaiter: any = {
-              name: waitersList.name,
-              points: pointsTotal
-            };
+            const myWaiter: any = [
+              {
+                name: waitersList.name,
+                points: pointsTotal
+              }
+            ];
             this.waitersArray.push(myWaiter);
-            console.log(myWaiter);
+            console.log(this.waitersArray);
+            this.dataService.postWaitersForm(this.waitersArray).subscribe((response) => console.log(response));
           }
         },
         error => this.errorHandler(error),
