@@ -52,7 +52,7 @@ export class DatasService {
     postDate(dateForm): Observable<any> {
         console.log(dateForm.value.date);
         const date = dateForm.value;
-        return this.http.post(environment.api_url + environment.date_todays, JSON.stringify(date), { headers: this.headers_json });
+        return this.http.post(environment.api_url + 'set-dates', JSON.stringify(date), { headers: this.headers_json });
     }
     getPointsFromServer(): Observable<any> {
         return this.http.get(environment.api_url + environment.puntuactions, { headers: this.headers_json });
