@@ -97,12 +97,12 @@ export class WaitersPage implements OnInit {
         waitersList => {
           if (waitersList.points) {
             const concatArray = [...waitersList.points];
-            console.log(concatArray);
+            // console.log(concatArray);
             // tslint:disable-next-line: only-arrow-functions
             const pointsTotal = concatArray.reduce(function (prev, cur) {
               return prev + cur;
             }, 0);
-            console.log(pointsTotal);
+            // console.log(pointsTotal);
             const myWaiter: any = [
               {
                 name: waitersList.name,
@@ -110,8 +110,24 @@ export class WaitersPage implements OnInit {
               }
             ];
             this.waitersArray.push(myWaiter);
-            console.log(this.waitersArray);
-            this.dataService.postWaitersForm(this.waitersArray).subscribe((response) => console.log(response));
+            console.log(myWaiter);
+
+            let formData = new FormData()
+            formData.append('waiterList', myWaiter);
+
+
+            // let myData: any;
+            // postData.forEach(element => {
+            //     console.log(element);
+            //     myData = {
+            //         first_name: element.first_name,
+            //         last_name: element.last_name,
+            //     };
+            //     console.log(myData);
+            // });
+
+
+            this.dataService.postWaitersForm(formData).subscribe((response) => console.log(response));
           }
         },
         error => this.errorHandler(error),

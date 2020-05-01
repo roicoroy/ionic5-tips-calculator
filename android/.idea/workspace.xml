@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd687ada-2e1a-448c-9894-751fec014cbd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/calculator-slides/calculator-slides.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.html" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/intro/waiters/waiters.page.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/app/services/data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../src/app/services/data.service.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,6 +36,9 @@
   </component>
   <component name="ProjectId" id="1aCwnH5n71pQrBiMU8e64FBCfJ7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../bacardi-app/platforms" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
