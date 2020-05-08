@@ -40,7 +40,14 @@
                 "input": "src/global.scss"
               }
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "src/assets/js/jquery-3.3.1.min.js"
+              },
+              {
+                "input": "src/assets/js/swiper.min.js"
+              }
+            ]
           },
           "configurations": {
             "production": {

@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicSelectableModule } from './ionic-selectable/ionic-selectable.module';
 import { IonPicker } from './ion-picker/ion-picker';
+import { FooterComponent } from '../pages/setup/footer/footer.component';
+import { PopoverComponent } from './popover/popover.component';
+
 
 @NgModule({
     imports: [
@@ -13,14 +16,20 @@ import { IonPicker } from './ion-picker/ion-picker';
         IonicSelectableModule
     ],
     declarations: [
-        IonPicker
+        IonPicker,
+        FooterComponent,
+        PopoverComponent
     ],
     entryComponents: [
-        IonPicker
+        IonPicker,
+        FooterComponent,
+        PopoverComponent
     ],
     exports: [
         IonicSelectableModule,
-        IonPicker
+        IonPicker,
+        FooterComponent,
+        PopoverComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA,

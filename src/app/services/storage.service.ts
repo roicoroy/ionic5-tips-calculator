@@ -9,16 +9,16 @@ export class StorageService {
   constructor(
     private storage: Storage
   ) { }
-  async getTokenFromPromise(): Promise<any> {
+  async getTokenFromPromise(key): Promise<any> {
     return await this.storage.ready().then(() => {
-      return this.storage.get('token').then(
+      return this.storage.get(key).then(
         (data) => {
           return data;
         },
         (error) => console.error(error));
     });
   }
-  getTokenAsObservable(): Observable<any> {
-    return from(this.getTokenFromPromise());
+  getTokenAsObservable(key): Observable<any> {
+    return from(this.getTokenFromPromise(key));
   }
 }

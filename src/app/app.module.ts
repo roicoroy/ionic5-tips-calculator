@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TokenInterceptor } from './services/interceptor';
 import { IonicStorageModule } from '@ionic/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomComponentsModule } from './components/custom-components.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     IonicStorageModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CustomComponentsModule
   ],
   providers: [
     WheelSelector,

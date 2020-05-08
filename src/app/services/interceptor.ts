@@ -18,8 +18,8 @@ export class TokenInterceptor implements HttpInterceptor {
     ) { }
     intercept(request: HttpRequest<any>, next: HttpHandler):
         Observable<HttpEvent<any>> {
-        if (this.storage.getTokenAsObservable()) {
-            return this.storage.getTokenAsObservable().pipe(
+        if (this.storage.getTokenAsObservable('token')) {
+            return this.storage.getTokenAsObservable('token').pipe(
                 mergeMap(token => {
                     let clonedReq = this.addToken(request, token);
                     return next.handle(clonedReq);

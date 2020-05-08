@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color='dark'>
+    <!-- <ion-buttons slot="end">
+      <ion-button (click)="notifications.presentPopover()">
+        <ion-icon slot="start" name="add"></ion-icon>
+        clear form
+      </ion-button>
+    </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="addNewWaitersField()" expand="block" fill="clear" shape="round">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <form class="waiters-form" [formGroup]="waitersForm" novalidate>
+        <ion-item-group formArrayName="waitersList">
+          <ion-item-sliding [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
+            <ion-item>
+              <ion-col size="4">
+                <ion-select formControlName="waiter" [interfaceOptions]="customPopoverOptions" interface="alert"
+                  multiple="false" placeholder="Add Waiter">
+                  <ion-select-option *ngFor="let w of waitersList" [value]="w.id">
+                    {{ w.last_name | uppercase }},
+                    {{ w.first_name }}
+                  </ion-select-option>
+                </ion-select>
+              </ion-col>
+              <ion-col size="4">
+                <ion-item>
+                  <ion-select formControlName="points_awarded" [interfaceOptions]="customPopoverOptions" interface="alert"
+                    multiple="true" placeholder="Add Points">
+                    <ion-select-option *ngFor="let p of pointsList" [value]="p.id">
+                      {{ p.criteria }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <ion-item>
+                  <ion-input type="number" formControlName="hours_worked" placeholder="Insert the hours"></ion-input>
+                </ion-item>
+              </ion-col>
+
+            </ion-item>
+            <ion-item-options side="end">
+              <ion-item-option color="danger" (click)="removeWaitersField(i)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-item-group>
+      </form>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color='dark'>
+    <ion-button (click)='resetForm()' expand="block" fill="solid" shape="round">
+      Reset Operation
+    </ion-button>
+    <ion-button (click)='submitForm()' expand="block" fill="solid" shape="round">
+      Sumbmit and redirect
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
