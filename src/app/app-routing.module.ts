@@ -1,19 +1,35 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IonNavPage } from './ion-nav/ion-nav.page';
 
 const routes: Routes = [
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  // },
+
+  // {
+  //   path: '',
+  //   loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+  // },
   {
     path: '',
-    loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./ion-nav/ion-nav.module').then(m => m.IonNavPageModule),
+    // outlet: 'warning'
   },
   {
-    path: 'calculator',
-    loadChildren: () => import('./calculator/calculator.module').then( m => m.CalculatorPageModule)
+    path: 'nav', component: IonNavPage,
   },
-  {
-    path: 'login',
-    loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
-  }
+
+  // {
+  //   path: '',
+  //   redirectTo: 'home',
+  //   pathMatch: 'full'
+  // },
+  // {
+  //   path: 'ion-nav',
+  //   loadChildren: () => import('./ion-nav/ion-nav.module').then( m => m.IonNavPageModule)
+  // },
 ];
 @NgModule({
   imports: [

@@ -1,3 +1,20 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-content>
+    <ion-grid id='app-body'>
+      <ion-row class='top'>
+        <ion-col size="12">
+          <ion-list>
+            <ion-text color="primary">
+              <h1>Awesome text</h1>
+            </ion-text>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row class='bottom'>
+        <ion-col size="12">
+          <ion-router-outlet></ion-router-outlet>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 </ion-app>

@@ -1,0 +1,102 @@
+<ion-content>
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color='primary'>
+      <ion-button (click)="navigate('tab1')">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+        tab1
+      </ion-button>
+      <ion-button (click)="navigate('tab2')">
+        <ion-icon slot="start" name="add"></ion-icon>
+        tab2
+      </ion-button>
+      <ion-button (click)="navigate('tab3')">
+        <ion-icon slot="start" name="add"></ion-icon>
+        tab3
+      </ion-button>
+      <ion-button (click)="navigate('tab4')">
+        <ion-icon slot="start" name="add"></ion-icon>
+        tab4
+      </ion-button>
+      <ion-button (click)="navigate('tab5')">
+        <ion-icon slot="icon-only" slot="start" name="add"></ion-icon>
+        tab5
+      </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+
+<!-- <ion-tabs>
+
+  <ion-tab-bar slot="bottom" color="purple">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="flame"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab2">
+      <ion-icon name="search"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab3" class="custom-tab">
+      <ion-icon name="add"></ion-icon>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab4">
+      <ion-icon  name="notifications"></ion-icon>
+      <ion-badge>9</ion-badge>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab5" class="custom-profile">
+      <ion-icon></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs> -->
+
+<!-- 
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <ion-router-outlet></ion-router-outlet>
+    </ion-col>
+  </ion-row>
+</ion-grid> -->
+<!-- 
+
+<nav>
+  <a routerLink="info" routerLinkActive="active">Info</a>
+  -
+  <a [routerLink]="[{ outlets: { warning: ['warning']} }]">Warning</a>
+  -
+  <a [routerLink]="[{ outlets: { danger: ['danger']} }]">Danger</a>
+</nav> -->
+
+
+<!-- <mat-grid-list cols="3" rowHeight="3:1">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Info Section</mat-card-title>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Warning Section</mat-card-title>
+      <mat-card-content>
+        <router-outlet name="warning"></router-outlet>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title>Danger Section</mat-card-title>
+      <mat-card-content>
+        <router-outlet name="danger"></router-outlet>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list> -->
