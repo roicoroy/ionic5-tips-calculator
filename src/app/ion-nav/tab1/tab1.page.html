@@ -1,9 +1,64 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>tab1</ion-title>
+    <ion-title>
+      Calculator
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
- 
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Calculator</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid class='ion-text-center'>
+    <ion-row class='cal-tips-made'>
+      <ion-col size="12">
+        Tips made total <br>
+        £ {{ history$ | async }}
+        <ion-input type="number" placeholder="How much did we make today" #userInput [formControl]="TipsMadeControl"
+          [(ngModel)]="tipsMade"></ion-input>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class='cal-header ion-justify-content-center'>
+      <ion-col size="2">Waiters</ion-col>
+      <ion-col size="2">Points Awarded</ion-col>
+      <ion-col size="2">Hours Worked</ion-col>
+      <ion-col size="2">Total A</ion-col>
+      <ion-col size="2">Total B</ion-col>
+      <ion-col size="2">Tips Recieved</ion-col>
+    </ion-row>
+
+    <ion-row class='cal-body' *ngFor='let w of waitersArray'>
+      <ion-col size="2">{{ w.name }}</ion-col>
+      <ion-col size="2">{{ w.points }}</ion-col>
+      <ion-col size="2">{{ w.hours }}</ion-col>
+      <ion-col size="2">{{ w.totalA }}</ion-col>
+      <ion-col size="2">{{ totalB | number }}</ion-col>
+      <ion-col size="2">{{ w?.totalA * totalB | number }}</ion-col>
+    </ion-row>
+    <ion-row class='cal-results'>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2">
+        {{ totalA }}
+        totalA result
+      </ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+
+    <ion-row class='cal-footer'>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+      <ion-col size="2"></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

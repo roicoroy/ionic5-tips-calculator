@@ -1,0 +1,17 @@
+ion-grid{
+    display: contents;
+}
+ion-col{
+    border: 1px solid black;
+}
+.cal-header {
+    background: var(--ion-color-primary);
+    font-size: 12px;
+}
+.cal-body {
+    background: var(--ion-color-warning); 
+}
+.cal-footer {
+    background: var(--ion-color-primary);
+    height: 50px
+}
