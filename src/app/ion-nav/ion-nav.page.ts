@@ -7,14 +7,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./ion-nav.page.scss'],
 })
 export class IonNavPage implements OnInit {
-
+  public active;
+  selectedPage = 'tab1';
   constructor(
     private router: Router
   ) { }
+  ionViewWillEnter() {
+    this.navigate(this.selectedPage);
 
+  }
   ngOnInit() {
   }
   navigate(route) {
-    this.router.navigateByUrl(`ion-nav/${route}`);
+    this.router.navigateByUrl(`ion-nav/${route}`).then(() => {
+      this.active = route;
+    });
   }
+  // onClick() {
+  //   this.active = !this.active;
+  // }
+  // onFocus($event) {
+  //   console.log($event);
+  // }
 }

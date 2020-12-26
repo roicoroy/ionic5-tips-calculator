@@ -23,7 +23,7 @@ import { pageTransition, popAnimation } from './animations/page-transitions';
       // navAnimation: popAnimation
     }),
     AppRoutingModule,
-    MaterialModule,
+    // MaterialModule,
     BrowserAnimationsModule
   ],
   providers: [

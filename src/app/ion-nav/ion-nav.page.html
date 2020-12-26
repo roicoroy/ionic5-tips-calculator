@@ -2,29 +2,57 @@
   <ion-router-outlet></ion-router-outlet>
 </ion-content>
 <ion-footer>
-  <ion-toolbar color='primary'>
-      <ion-button (click)="navigate('tab1')">
-        <ion-icon slot="icon-only" name="add"></ion-icon>
+
+  <div class="phone">
+    <input type="radio" name="s" id="s1">
+    <input type="radio" name="s" id="s2" checked="checked">
+    <input type="radio" name="s" id="s3">
+    <label for="s1"><img src="http://co0kie.github.io/codepen/mobile-nav/facebook.svg" alt=""></label>
+    <label for="s2"><img src="http://co0kie.github.io/codepen/mobile-nav/twitter.svg" alt=""></label>
+    <label for="s3"><img src="http://co0kie.github.io/codepen/mobile-nav/instagram.svg" alt=""></label>
+    <div class="circle"></div>
+    <div class="phone_content">
+      <div class="phone_bottom">
+        <span class="indicator"></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- <ion-toolbar color='warning'>
+    <ion-button [ngClass]="{'activated' : active === 'tab1'}" (click)="navigate('tab1')" fill='outline'>
+      <ion-icon name="add"></ion-icon>
+      <ion-text>
         tab1
-      </ion-button>
-      <ion-button (click)="navigate('tab2')">
-        <ion-icon slot="start" name="add"></ion-icon>
+      </ion-text>
+    </ion-button>
+    <ion-button [ngClass]="{'activated' : active === 'tab2'}" (click)="navigate('tab2')" fill='outline'>
+      <ion-icon name="add"></ion-icon>
+      <ion-text>
         tab2
-      </ion-button>
-      <ion-button (click)="navigate('tab3')">
-        <ion-icon slot="start" name="add"></ion-icon>
+      </ion-text>
+    </ion-button>
+    <ion-button [ngClass]="{'activated' : active === 'tab3'}" (click)="navigate('tab3')" fill='outline'>
+      <ion-icon slot="start" name="add"></ion-icon>
+      <ion-text>
         tab3
-      </ion-button>
-      <ion-button (click)="navigate('tab4')">
-        <ion-icon slot="start" name="add"></ion-icon>
+      </ion-text>
+    </ion-button>
+    <ion-button [ngClass]="{'activated' : active === 'tab4'}" (click)="navigate('tab4')" fill='outline'>
+      <ion-icon slot="start" name="add"></ion-icon>
+      <ion-text>
         tab4
-      </ion-button>
-      <ion-button (click)="navigate('tab5')">
-        <ion-icon slot="icon-only" slot="start" name="add"></ion-icon>
+      </ion-text>
+    </ion-button>
+    <ion-button [ngClass]="{'activated' : active === 'tab5'}" (click)="navigate('tab5')" fill='outline'>
+      <ion-icon slot="icon-only" slot="start" name="add"></ion-icon>
+      <ion-text>
         tab5
-      </ion-button>
-  </ion-toolbar>
+      </ion-text>
+    </ion-button>
+  </ion-toolbar> -->
 </ion-footer>
+
 
 
 <!-- <ion-tabs>
