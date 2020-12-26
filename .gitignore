@@ -31,3 +31,4 @@ npm-debug.log*
 /www
 *.xml
 android/.idea/libraries/Gradle____local_aars___C__Users_RBento_Documents_GitHub_ionic5_tips_calculator_android_capacitor_cordova_android_plugins_src_main_libs_sqlite_native_driver_jar_unspecified_jar.xml
+*.xml
