@@ -39,16 +39,18 @@ export class Tab1Page implements OnInit {
   @ViewChild('userInput') userInputViewChild;
   userInputElement: HTMLInputElement;
   constructor() {
-    this.history$ = this.TipsMadeControl.valueChanges.pipe(
+     
+    this.TipsMadeControl.valueChanges.pipe(
       debounceTime(500),
       tap(t => {
         this.totalB = t / this.totalA;
       }),
-    );
+    ).subscribe(res=> this.history$ = res);
   }
   ionViewDidEnter() {
   }
   ngOnInit() {
+
     this.waiters.forEach(res => {
       let data  = {
         name: res.name,
