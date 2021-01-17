@@ -1,0 +1,66 @@
+.row-body {
+    background-color: var(--ion-color-warning);
+    ion-col {
+        border: 1px solid black;
+    }
+}
+.row-header {
+    background-color: var(--ion-color-success);
+    ion-col {
+        border: 1px solid black;
+    }
+}
+.border {
+    border: 1px solid black;
+}
+ion-item {
+    --ion-background-color: transparent !important;
+}
+ion-card {
+    margin: 0 0 0 0;
+    border-radius: 0;
+}
+ion-card.card-headers {
+    display: flex;
+    background-color: var(--ion-color-warning);
+    margin-top: 5%;
+    // position: absolute;
+    ion-item.name-item {
+        background-color: green;
+        width: 50%;
+    }
+    ion-item.points-item {
+        background-color: orange;
+        width: 30%;
+    }
+    ion-item.hours-item {
+        background-color: pink;
+        width: 30%;
+    }
+    ion-item.tips-item {
+        background-color: blue;
+        width: 50%;
+    }
+}
+ion-card.waiters-array {
+    display: flex;
+    ion-item.name-item {
+        background-color: green;
+        width: 50%;
+    }
+    ion-item.points-item {
+        background-color: orange;
+        width: 30%;
+    }
+    ion-item.hours-item {
+        background-color: pink;
+        width: 30%;
+    }
+    ion-item.tips-item {
+        background-color: blue;
+        width: 50%;
+    }
+    .name-label {
+        background-color: red;
+    }
+}

@@ -37,9 +37,19 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/assets/js/swiper.min.css"
               }
             ],
-            "scripts": []
+            "scripts": [
+              {
+                "input": "src/assets/js/jquery-3.3.1.min.js"
+              },
+              {
+                "input": "src/assets/js/swiper.min.js"
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -128,7 +138,9 @@
               "tsconfig.spec.json",
               "e2e/tsconfig.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         },
         "e2e": {
@@ -174,7 +186,8 @@
     }
   },
   "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
+    "defaultCollection": "@ionic/angular-toolkit",
+    "analytics": "12b97c43-fb1c-4f4a-94ec-ee5a67148afe"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

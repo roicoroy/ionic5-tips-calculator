@@ -1,0 +1,16 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "tips-calculator.jks",
+            "storePassword": "calculator",
+            "alias": "tips-calculator-aliaws",
+            "password": "calculator"
+        },
+        "release": {
+            "keystore": "tips-calculator.jks",
+            "storePassword": "calculator",
+            "alias": "tips-calculator-aliaws",
+            "password": "calculator"
+        }
+    }
+}
