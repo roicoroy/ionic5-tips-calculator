@@ -1,126 +1,104 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title> Setup </ion-title>
-    <ion-buttons slot="start">
-      <ion-button (click)='home()'>
-        <ion-icon color='primary' slot="icon-only" name="home"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size='12' class="ion-text-center">
-        <ion-button (click)="addNewWaitersField()" shape="round" expand="full" fill="solid" color="primary"
-          size='small'>
-          <ion-icon name="add-circle"></ion-icon>
-          Add Waiter
-        </ion-button>
-      </ion-col>
-
-
-      <ion-col size="12">
-        <form [formGroup]="waitersForm" novalidate>
-          <ion-list formArrayName="waitersList">
-            <ion-item-sliding [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
-
-              <ion-item>
-                <ion-input class='border' type="text" maxlength="50" formControlName="name"></ion-input>
-              </ion-item>
-
-              <ion-item>
-                <ion-col *ngIf='!displayPoints[i]'>
-                  <ion-button (click)="presentAlertRadio(i)" expand="block" fill="clear" shape="round">
-                    Points
-                  </ion-button>
-                </ion-col>
-                <ion-col>
-                  <ion-text color="dark">
-                    {{ displayPoints[i] }}
-                  </ion-text>
-                </ion-col>
-              </ion-item>
-
-              <ion-item>
-                <ion-col *ngIf='!displayHours[i]'>
-                  <ion-button (click)="showPicker(i)" fill="clear" shape="round">
-                    <ion-icon color='dark' name="stopwatch-outline"></ion-icon>
-                  </ion-button>
-                </ion-col>
-                <ion-col>
-                  <ion-text color="dark">
-                    {{ displayHours[i] }}
-                  </ion-text>
-                </ion-col>
-              </ion-item>
-
-              <ion-item-options side="end">
-                <ion-item-option (click)="removeWaitersField(i)">Delete</ion-item-option>
-              </ion-item-options>
-
-            </ion-item-sliding>
-          </ion-list>
-        </form>
-        <!-- <form [formGroup]="waitersForm" novalidate>
-          <ion-row class='form-body' formArrayName="waitersList">
-            <div class='grid-container' [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
-              <ion-col size="3">
-                <ion-label>Name</ion-label>
-                <ion-input class='border' type="text" maxlength="50" formControlName="name"></ion-input>
-              </ion-col>
-              <ion-col size="4">
-                <ion-row>
-                  <ion-col>
-                    <ion-button (click)="presentAlertRadio(i)" expand="block" fill="clear" shape="round">
-                      Points
-                    </ion-button>
-                  </ion-col>
-                  <ion-col *ngFor='let p of displayPoints[i]; let i = index'>
-                    <ion-badge class='points-badge' color="dark">
-                      {{ p }}
-                    </ion-badge>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-              <ion-col size="4">
-                <ion-row>
-                  <ion-col *ngIf='!displayHours[i]'>
-                    <ion-button (click)="showPicker(i)" fill="clear" shape="round">
-                      <ion-icon color='dark' name="stopwatch-outline"></ion-icon>
-                    </ion-button>
-                  </ion-col>
-                  <ion-col *ngIf='displayHours[i]'>
-                    <ion-text color="dark">
-                      {{ displayHours[i] }}
-                    </ion-text>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-              <ion-col size="1" class='delete-column'>
-                <ion-button (click)="removeWaitersField(i)" fill="clear" shape="round">
-                  <ion-icon color='dark' name="trash"></ion-icon>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title> Setup </ion-title>
+            <ion-buttons slot="start">
+                <ion-button (click)='home()'>
+                    <ion-icon color='primary' slot="icon-only" name="home"></ion-icon>
                 </ion-button>
-              </ion-col>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+    <!-- <ion-col size="12">
+        <ion-button tooltip="I'm a beautiful tooltip" positionH="left" positionH="right" [arrow]="showArrow" [event]="tooltipEvent" [debounce]="debounce" [duration]="duration" fill="outline">View</ion-button>
+    </ion-col> -->
+    <ion-grid>
+
+
+        <form [formGroup]="waitersForm" novalidate>
+            <div formArrayName="waitersList">
+                <ion-card [formGroupName]="i" *ngFor="let item of formData.controls; let i = index">
+                    <ion-card-header>
+                        <ion-row class='ion-text-center'>
+                            <ion-col size="12" *ngIf='i === 0'>
+                                <ion-card-title>
+                                    <ion-item>
+                                        <ion-label position="floating">Name</ion-label>
+                                        <ion-input class='border' type="text" maxlength="50" formControlName="name">
+                                        </ion-input>
+                                    </ion-item>
+                                </ion-card-title>
+                            </ion-col>
+                            <ion-col size="9" *ngIf='i != 0'>
+                                <ion-card-title>
+                                    <ion-item>
+                                        <ion-label position="floating">Name</ion-label>
+                                        <ion-input class='border' type="text" maxlength="50" formControlName="name">
+                                        </ion-input>
+                                    </ion-item>
+                                </ion-card-title>
+                            </ion-col>
+                            <ion-col class='remove-btn-col' size="3" *ngIf='i != 0'>
+                                <ion-button size="small" (click)="removeWaitersField(i)" color='danger' fill="outline">
+                                    Remove
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-row class='ion-text-center'>
+                            <ion-col size="6">
+                                <ion-button *ngIf='!displayPoints[i]' (click)="presentAlertRadio(i)" fill="outline" shape="round">
+                                    Points
+                                </ion-button>
+
+                                <ion-text color="dark">
+                                    {{ displayPoints[i] }}
+                                </ion-text>
+                            </ion-col>
+
+                            <ion-col size="6">
+                                <ion-button *ngIf='!displayHours[i]' (click)="showPicker(i)" fill="outline" shape="round">
+                                    Hours
+                                </ion-button>
+                                <ion-text color="dark">
+                                    {{ displayHours[i] }}
+                                </ion-text>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-content>
+                </ion-card>
             </div>
-          </ion-row>
-        </form> -->
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </form>
+
+
+    </ion-grid>
+
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row class='submit-row'>
-        <ion-col size="12">
-          <ion-button (click)='submitWaiters()' expand="block" fill="solid" shape="round" color='danger'>
-            Next
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
+    <ion-toolbar color='secondary'>
+        <ion-grid class='footer-grid'>
+            <ion-row>
+                <ion-col size="2">
+                    <ion-button size="small" (click)='home()'>
+                        <ion-icon color='light' slot="icon-only" name="home"></ion-icon>
+                    </ion-button>
+                </ion-col>
+                <ion-col size="8">
+                    <ion-button size="small" expand="block" (click)='submitWaiters()'>
+                        <ion-text color="light">
+                            Next
+                        </ion-text>
+                    </ion-button>
+                </ion-col>
+                <ion-col size='2'>
+                    <ion-button size="small" (click)='addNewWaitersField()'>
+                        <ion-icon color='light' slot="icon-only" name="add"></ion-icon>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
 </ion-footer>

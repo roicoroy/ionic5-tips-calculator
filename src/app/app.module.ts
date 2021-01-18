@@ -13,6 +13,7 @@ import { IonicStorageModule } from "@ionic/storage";
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { popAnimation } from './animations/animations';
+import { TooltipsModule } from './components/ionic4-tooltips/src/tooltips.module';
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = <any>{
     'pinch': { enable: false },
@@ -27,14 +28,15 @@ export class CustomHammerConfig extends HammerGestureConfig {
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: 'md',
-      navAnimation: popAnimation
+      mode: 'ios',
+      // navAnimation: popAnimation
     }),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    TooltipsModule.forRoot(),
   ],
   providers: [
     StatusBar,

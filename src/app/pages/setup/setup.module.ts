@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { SetupPageRoutingModule } from './setup-routing.module';
 import { SetupPage } from './setup.page';
+import { TooltipsModule } from 'src/app/components/ionic4-tooltips/src/tooltips.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SetupPage } from './setup.page';
     IonicModule,
     SetupPageRoutingModule,
     ReactiveFormsModule,
-    CustomComponentsModule
+    CustomComponentsModule,
+    TooltipsModule
   ],
   declarations: [SetupPage]
 })

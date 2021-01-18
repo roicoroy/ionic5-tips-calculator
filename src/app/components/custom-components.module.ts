@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PopoverComponent } from './popover/popover.component';
 
 
 
@@ -10,16 +11,16 @@ import { FormsModule } from '@angular/forms';
         IonicModule,
         CommonModule,
         FormsModule,
- 
+
     ],
     declarations: [
-   
+        PopoverComponent
     ],
     entryComponents: [
-  
+        PopoverComponent
     ],
     exports: [
-   
+        PopoverComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA,
